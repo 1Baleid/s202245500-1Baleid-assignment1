@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initScrollProgress();
     initScrollReveal();
     initProjectFilter();
-    initContactForm();
+    // Contact form removed - using simple contact info
     initCounterAnimation();
     initParticles();
     initSmoothScroll();
@@ -23,6 +23,9 @@ document.addEventListener('DOMContentLoaded', () => {
     initTiltCards();
     initTextSplit();
     initParallaxEffects();
+    initJourneySection();
+    initExperienceModal();
+    initProjectModal();
 });
 
 /* ------------------------------------------------
@@ -488,167 +491,33 @@ function initScrollReveal() {
         });
     });
 
-    // Project cards stagger animation with 3D flip
-    const projectCards = document.querySelectorAll('.project-card');
+    // Simple fade-in for project rows
+    const projectRows = document.querySelectorAll('.project-row');
 
-    projectCards.forEach((card, index) => {
-        gsap.set(card, {
-            opacity: 0,
-            y: 100,
-            rotateX: 15,
-            transformPerspective: 1000
-        });
+    projectRows.forEach((row, index) => {
+        gsap.set(row, { opacity: 0, y: 30 });
 
-        gsap.to(card, {
+        gsap.to(row, {
             scrollTrigger: {
-                trigger: card,
+                trigger: row,
                 start: 'top 90%',
                 toggleActions: 'play none none none'
             },
             opacity: 1,
             y: 0,
-            rotateX: 0,
-            duration: 0.8,
-            delay: index * 0.1,
-            ease: 'power3.out'
-        });
-    });
-
-    // Skill categories animation with scale
-    const skillCategories = document.querySelectorAll('.skill-category');
-
-    skillCategories.forEach((category, index) => {
-        gsap.set(category, {
-            opacity: 0,
-            scale: 0.8,
-            y: 50
-        });
-
-        gsap.to(category, {
-            scrollTrigger: {
-                trigger: category,
-                start: 'top 85%',
-                toggleActions: 'play none none none'
-            },
-            opacity: 1,
-            scale: 1,
-            y: 0,
-            duration: 0.6,
-            delay: index * 0.15,
-            ease: 'back.out(1.7)'
-        });
-    });
-
-    // Skill tags stagger animation
-    skillCategories.forEach(category => {
-        const tags = category.querySelectorAll('.skill-tag');
-
-        gsap.set(tags, {
-            opacity: 0,
-            scale: 0,
-            y: 20
-        });
-
-        gsap.to(tags, {
-            scrollTrigger: {
-                trigger: category,
-                start: 'top 80%',
-                toggleActions: 'play none none none'
-            },
-            opacity: 1,
-            scale: 1,
-            y: 0,
-            duration: 0.4,
-            stagger: 0.05,
-            ease: 'back.out(2)',
-            delay: 0.3
-        });
-    });
-
-    // Timeline items animation with line drawing effect
-    const timelineItems = document.querySelectorAll('.timeline__item');
-
-    timelineItems.forEach((item, index) => {
-        gsap.set(item, {
-            opacity: 0,
-            x: -50
-        });
-
-        gsap.to(item, {
-            scrollTrigger: {
-                trigger: item,
-                start: 'top 85%',
-                toggleActions: 'play none none none'
-            },
-            opacity: 1,
-            x: 0,
-            duration: 0.8,
-            delay: index * 0.15,
-            ease: 'power3.out'
-        });
-
-        // Animate the marker
-        const marker = item.querySelector('.timeline__marker');
-        gsap.set(marker, { scale: 0 });
-
-        gsap.to(marker, {
-            scrollTrigger: {
-                trigger: item,
-                start: 'top 85%',
-                toggleActions: 'play none none none'
-            },
-            scale: 1,
             duration: 0.5,
-            delay: index * 0.15 + 0.3,
-            ease: 'elastic.out(1, 0.5)'
+            delay: index * 0.1,
+            ease: 'power2.out'
         });
     });
+
 }
 
 /* ------------------------------------------------
-   Project Filter
+   Project Filter (Disabled - using simple list now)
    ------------------------------------------------ */
 function initProjectFilter() {
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    const projectCards = document.querySelectorAll('.project-card');
-
-    filterBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            // Update active button
-            filterBtns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-
-            const filter = btn.dataset.filter;
-
-            // Filter projects with animation
-            projectCards.forEach((card, index) => {
-                const category = card.dataset.category;
-
-                if (filter === 'all' || category === filter) {
-                    gsap.to(card, {
-                        opacity: 1,
-                        scale: 1,
-                        y: 0,
-                        duration: 0.5,
-                        delay: index * 0.05,
-                        ease: 'back.out(1.7)',
-                        display: 'block'
-                    });
-                } else {
-                    gsap.to(card, {
-                        opacity: 0,
-                        scale: 0.8,
-                        y: 20,
-                        duration: 0.4,
-                        ease: 'power2.in',
-                        onComplete: () => {
-                            card.style.display = 'none';
-                        }
-                    });
-                }
-            });
-        });
-    });
+    // Filter removed - projects displayed as simple list
 }
 
 /* ------------------------------------------------
@@ -913,38 +782,7 @@ function initMagneticButtons() {
    Tilt Cards
    ------------------------------------------------ */
 function initTiltCards() {
-    const tiltCards = document.querySelectorAll('.project-card, .skill-category');
-
-    tiltCards.forEach(card => {
-        card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-
-            const rotateX = (y - centerY) / 15;
-            const rotateY = (centerX - x) / 15;
-
-            gsap.to(card, {
-                rotateX: rotateX,
-                rotateY: rotateY,
-                transformPerspective: 1000,
-                duration: 0.4,
-                ease: 'power2.out'
-            });
-        });
-
-        card.addEventListener('mouseleave', () => {
-            gsap.to(card, {
-                rotateX: 0,
-                rotateY: 0,
-                duration: 0.6,
-                ease: 'power2.out'
-            });
-        });
-    });
+    // Tilt effect disabled for better performance
 }
 
 /* ------------------------------------------------
@@ -961,31 +799,6 @@ function initParallaxEffects() {
         },
         y: -50,
         rotation: -3
-    });
-
-    // Parallax for skill categories
-    const skillCategories = document.querySelectorAll('.skill-category');
-    skillCategories.forEach((category, index) => {
-        gsap.to(category, {
-            scrollTrigger: {
-                trigger: '.skills',
-                start: 'top bottom',
-                end: 'bottom top',
-                scrub: 1
-            },
-            y: (index % 2 === 0) ? -30 : 30
-        });
-    });
-
-    // Parallax for timeline
-    gsap.to('.timeline', {
-        scrollTrigger: {
-            trigger: '.experience',
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: 1
-        },
-        backgroundPosition: '0% 100%'
     });
 
     // Section reveal animations
@@ -1034,6 +847,582 @@ if ('IntersectionObserver' in window) {
 
     lazyImages.forEach(img => imageObserver.observe(img));
 }
+
+/* ------------------------------------------------
+   Journey Section Animations
+   ------------------------------------------------ */
+function initJourneySection() {
+    // Animate education cards
+    const educationGrid = document.querySelector('.journey__grid--education');
+    const educationCards = educationGrid ? educationGrid.querySelectorAll('.journey__card') : [];
+
+    // Animate experience timeline items
+    const experienceTimeline = document.querySelector('.experience-timeline');
+    const experienceItems = experienceTimeline ? experienceTimeline.querySelectorAll('.experience-timeline__item') : [];
+    const timelineLine = document.querySelector('.experience-timeline__line');
+
+    // Set initial state for education cards
+    educationCards.forEach((card) => {
+        gsap.set(card, {
+            opacity: 0,
+            y: 60,
+            scale: 0.9
+        });
+    });
+
+    // Animate education cards
+    educationCards.forEach((card, index) => {
+        gsap.to(card, {
+            scrollTrigger: {
+                trigger: '.journey__grid--education',
+                start: 'top 85%',
+                toggleActions: 'play none none none'
+            },
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.6,
+            delay: index * 0.15,
+            ease: 'back.out(1.4)'
+        });
+    });
+
+    // Animate timeline line
+    if (timelineLine) {
+        gsap.set(timelineLine, { scaleX: 0, transformOrigin: 'left center' });
+
+        gsap.to(timelineLine, {
+            scrollTrigger: {
+                trigger: '.experience-timeline',
+                start: 'top 80%',
+                toggleActions: 'play none none none'
+            },
+            scaleX: 1,
+            duration: 1.2,
+            ease: 'power2.out'
+        });
+    }
+
+    // Set initial state for experience items
+    experienceItems.forEach((item) => {
+        const card = item.querySelector('.experience-timeline__card');
+        const dot = item.querySelector('.experience-timeline__dot');
+
+        gsap.set(card, {
+            opacity: 0,
+            y: 40,
+            scale: 0.9
+        });
+
+        gsap.set(dot, {
+            scale: 0
+        });
+    });
+
+    // Animate experience items with stagger
+    experienceItems.forEach((item, index) => {
+        const card = item.querySelector('.experience-timeline__card');
+        const dot = item.querySelector('.experience-timeline__dot');
+
+        // Animate dot first
+        gsap.to(dot, {
+            scrollTrigger: {
+                trigger: '.experience-timeline',
+                start: 'top 75%',
+                toggleActions: 'play none none none'
+            },
+            scale: 1,
+            duration: 0.4,
+            delay: 0.3 + index * 0.1,
+            ease: 'back.out(2)'
+        });
+
+        // Then animate card
+        gsap.to(card, {
+            scrollTrigger: {
+                trigger: '.experience-timeline',
+                start: 'top 75%',
+                toggleActions: 'play none none none'
+            },
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.5,
+            delay: 0.4 + index * 0.1,
+            ease: 'back.out(1.4)'
+        });
+    });
+
+    // Add hover interactions for education cards
+    educationCards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            gsap.to(card, {
+                y: -10,
+                scale: 1.02,
+                boxShadow: '0 30px 60px rgba(0, 0, 0, 0.4), 0 0 40px rgba(255, 107, 107, 0.3)',
+                duration: 0.3,
+                ease: 'power2.out'
+            });
+        });
+
+        card.addEventListener('mouseleave', () => {
+            gsap.to(card, {
+                y: 0,
+                scale: 1,
+                boxShadow: 'none',
+                duration: 0.4,
+                ease: 'power2.out'
+            });
+        });
+    });
+}
+
+/* ------------------------------------------------
+   Experience Modal
+   ------------------------------------------------ */
+function initExperienceModal() {
+    const modal = document.getElementById('experienceModal');
+    const modalBackdrop = modal?.querySelector('.experience-modal__backdrop');
+    const modalClose = modal?.querySelector('.experience-modal__close');
+    // Get both education cards and experience timeline items
+    const educationCards = document.querySelectorAll('.journey__card');
+    const experienceItems = document.querySelectorAll('.experience-timeline__item');
+    const allClickableItems = [...educationCards, ...experienceItems];
+
+    if (!modal || allClickableItems.length === 0) return;
+
+    // Experience data from CV
+    const experienceData = {
+        // Experience
+        1: {
+            date: 'Jan 2026 - May 2026',
+            title: 'Research Assistant',
+            company: 'SDAIA-KFUPM Joint Research Center for AI (JRCAI)',
+            description: `<p><strong>Project:</strong> Evaluating VLMs/LLMs Hallucination in Domain-Specific Tasks</p><p>Selected due to academic excellence. Designing controlled experiments to detect, categorize, and reduce hallucinations in Vision-Language Models for healthcare and education domains.</p><p><strong>Supervisor:</strong> Dr. Muzammil Behzad</p>`
+        },
+        2: {
+            date: 'Oct 2025 - Present',
+            title: 'SAP Generative AI Developer',
+            company: 'SAP | Dual Study Program | Saudi Arabia',
+            description: `<p>Part of SAP's prestigious Dual Study Program, working on Generative AI solutions for enterprise applications.</p><p>Earned <strong>SAP Certified Associate</strong> certification in Generative AI Development (2025), demonstrating expertise in building AI-powered business solutions.</p>`
+        },
+        3: {
+            date: 'Aug 2025 - Present',
+            title: 'Technical Lead Intern',
+            company: 'Arkan | Remote',
+            description: `<p>Worked on building a construction management SaaS platform.</p><p>Bridged business priorities with technical design, ensuring strategic alignment.</p><p>Advised leadership by combining technical expertise with understanding of business needs.</p>`
+        },
+        4: {
+            date: 'Jan 2026',
+            title: 'MENA ML Winter School 2026 Scholar',
+            company: 'King Abdullah University of Science and Technology (KAUST) | Thuwal, Saudi Arabia',
+            description: `<p>Selected among <strong>300 participants from 2,222 applicants</strong> (13.5% acceptance rate) for the prestigious ML school hosted by King Abdullah University of Science and Technology.</p><p>Featured lectures by <strong>Google DeepMind researchers</strong> covering cutting-edge machine learning topics.</p>`
+        },
+        5: {
+            date: 'Jun 2025 - Aug 2025',
+            title: 'AI Engineer Trainee',
+            company: 'Renad Al Majd Group | Riyadh, Saudi Arabia',
+            description: `<p>Developed Retrieval-Augmented Generation (RAG) systems using <strong>LangChain & n8n</strong> for enterprise knowledge management and automation solutions.</p><p>Gained hands-on experience building production-ready AI systems for real business applications.</p>`
+        },
+        6: {
+            date: 'Jun 2025 - Aug 2025',
+            title: 'Project Management Assistant',
+            company: 'Code Link | Riyadh, Saudi Arabia',
+            description: `<p>Coordinated project tasks, deliverables, and stakeholder communication.</p><p>Gained valuable experience in project coordination and cross-functional team collaboration.</p>`
+        },
+        7: {
+            date: 'Aug 2024 - Present',
+            title: 'Peer Tutor',
+            company: 'Assistant Deanship of Student Excellence and Success (SES) | KFUPM, Dhahran',
+            description: `<p>Delivered <strong>140+ tutoring hours</strong> across 5 courses:</p><ul><li>ICS 108 - Object-Oriented Programming</li><li>ICS 253 - Discrete Structures</li><li>MATH 106 - Applied Calculus</li><li>ISE 291 - Introduction to Data Science</li><li>COE 292 - Introduction to Artificial Intelligence</li></ul>`
+        },
+        8: {
+            date: 'Feb 2026 - Present',
+            title: 'Vice President',
+            company: 'Artificial Intelligence for All (AIFA) Club | KFUPM',
+            description: `<p>Leading initiatives to democratize AI education on campus as Vice President of the AI for All (AIFA) Club.</p><p>Organizing workshops, seminars, and hands-on sessions to help students explore and learn about artificial intelligence.</p>`
+        },
+        9: {
+            date: 'Mar 2025 - May 2025',
+            title: 'Part Time',
+            company: 'Net Zero | University Events',
+            description: `<p>Part-time role supporting university events and initiatives related to sustainability and Net Zero goals.</p><p>Gained experience in event coordination and stakeholder engagement within an academic setting.</p>`
+        },
+        // Education
+        edu1: {
+            date: 'Aug 2022 - Present',
+            title: 'B.S. Software Engineering',
+            company: 'King Fahd University of Petroleum & Minerals (KFUPM)',
+            description: `<p><strong>GPA: 3.86/4.0</strong>, Dean's List</p><p>Pursuing a Bachelor's degree in Software Engineering at one of the top universities in the Middle East.</p><p><strong>Honors & Awards:</strong></p><ul><li>Physics 101 A+ Honor, SABIC Sponsored (Jun 2022)</li><li>Physics 102 A+ Honor, SABIC Sponsored (Jun 2022)</li></ul>`
+        },
+        edu2: {
+            date: 'Aug 2025 - Jan 2026',
+            title: 'Exchange Student - AI & Computer Science',
+            company: 'Nanyang Technological University (NTU), Singapore',
+            description: `<p><strong>First KFUPM student</strong> chosen to represent the university in Singapore at one of Asia's top universities.</p><p>Studied Machine Learning and Deep Learning courses, gaining international exposure and building a global network in the AI community.</p><p><strong>Projects completed:</strong></p><ul><li>LLM Human Preference Prediction (SC4000 Machine Learning)</li><li>Oxford Flowers Image Classification (SC4001 Deep Learning)</li></ul><p>GEM FAIR 2025 Letter of Participation</p>`
+        },
+        edu3: {
+            date: 'Jan - Feb 2025',
+            title: 'AI Specialist Program',
+            company: 'King Abdullah University of Science and Technology (KAUST)',
+            description: `<p>Completed intensive AI specialist program at KAUST covering advanced topics in artificial intelligence.</p><p><strong>Topics Covered:</strong></p><ul><li>Intro to AI - Linear/Logistic Regression</li><li>Advanced AI - CNNs, Generative AI</li></ul><p>Gained hands-on experience with cutting-edge AI techniques from world-class researchers.</p>`
+        }
+    };
+
+    // Open modal function
+    function openModal(experienceId) {
+        const data = experienceData[experienceId];
+        if (!data) return;
+
+        // Populate modal content
+        modal.querySelector('.experience-modal__date').textContent = data.date;
+        modal.querySelector('.experience-modal__title').textContent = data.title;
+        modal.querySelector('.experience-modal__company').textContent = data.company;
+        modal.querySelector('.experience-modal__description').innerHTML = data.description;
+
+        // Show modal with animation
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+
+        // GSAP animation for modal content
+        gsap.fromTo(modal.querySelector('.experience-modal__content'),
+            { scale: 0.9, y: 20, opacity: 0 },
+            { scale: 1, y: 0, opacity: 1, duration: 0.4, ease: 'back.out(1.4)' }
+        );
+    }
+
+    // Close modal function
+    function closeModal() {
+        gsap.to(modal.querySelector('.experience-modal__content'), {
+            scale: 0.9,
+            y: 20,
+            opacity: 0,
+            duration: 0.3,
+            ease: 'power2.in',
+            onComplete: () => {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+    }
+
+    // Event listeners for opening modal
+    allClickableItems.forEach(item => {
+        item.addEventListener('click', () => {
+            const experienceId = item.dataset.experience;
+            openModal(experienceId);
+        });
+    });
+
+    // Event listeners for closing modal
+    modalClose?.addEventListener('click', closeModal);
+    modalBackdrop?.addEventListener('click', closeModal);
+
+    // Keyboard support - Escape to close
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+            closeModal();
+        }
+    });
+}
+
+/* ------------------------------------------------
+   Project Modal
+   ------------------------------------------------ */
+function initProjectModal() {
+    const modal = document.getElementById('projectModal');
+    const modalBackdrop = modal?.querySelector('.project-modal__backdrop');
+    const modalClose = modal?.querySelector('.project-modal__close');
+    const projectCards = document.querySelectorAll('.project-row[data-project]');
+
+    if (!modal || projectCards.length === 0) return;
+
+    // Project data
+    const projectData = {
+        1: {
+            category: 'AI/ML',
+            title: 'Smart Sports Camera',
+            description: `<p>AI League Finalist project that earned recognition for innovation in sports technology.</p>
+            <p>Developed a YOLOv8-based smart camera system capable of tracking players in real-time and automatically generating sports highlight reels. The system uses computer vision to identify key moments in gameplay and creates compilation videos without manual intervention.</p>
+            <p><strong>Key Features:</strong></p>
+            <ul>
+                <li>Real-time player detection and tracking</li>
+                <li>Automated highlight generation</li>
+                <li>Multi-camera support</li>
+                <li>Performance analytics dashboard</li>
+            </ul>`,
+            tech: ['YOLOv8', 'Python', 'Computer Vision', 'OpenCV', 'PyTorch'],
+            github: 'https://github.com/1Baleid'
+        },
+        2: {
+            category: 'AI/ML',
+            title: 'LLM Human Preference Prediction',
+            description: `<p>NTU Machine Learning course project (SC4000) focused on understanding and predicting human preferences for Large Language Model outputs.</p>
+            <p>Built a system that predicts which LLM-generated responses humans will prefer using knowledge distillation techniques from multiple state-of-the-art models including Gemma, LLaMA, and Qwen.</p>
+            <p><strong>Techniques Used:</strong></p>
+            <ul>
+                <li>Knowledge distillation from multiple LLMs</li>
+                <li>Preference learning and ranking</li>
+                <li>Transformer fine-tuning</li>
+                <li>Ensemble methods</li>
+            </ul>`,
+            tech: ['LLMs', 'NLP', 'PyTorch', 'Transformers', 'Knowledge Distillation'],
+            github: 'https://github.com/1Baleid'
+        },
+        3: {
+            category: 'AI/ML',
+            title: 'Oxford Flowers Classification',
+            description: `<p>NTU Deep Learning course project (SC4001) implementing advanced image classification techniques on the Oxford Flowers 102 dataset.</p>
+            <p>Developed and optimized deep learning models for classifying 102 different flower species using PyTorch, achieving high accuracy through careful architecture selection and training strategies.</p>
+            <p><strong>Achievements:</strong></p>
+            <ul>
+                <li>Implemented multiple CNN architectures</li>
+                <li>Applied transfer learning from pretrained models</li>
+                <li>Data augmentation and regularization techniques</li>
+                <li>Hyperparameter optimization</li>
+            </ul>`,
+            tech: ['PyTorch', 'CNN', 'Deep Learning', 'Transfer Learning', 'Computer Vision'],
+            github: 'https://github.com/1Baleid'
+        },
+        4: {
+            category: 'Web Development',
+            title: 'ReqFlow',
+            description: `<p>A lightweight, web-based requirements management system designed specifically for small teams and startups who need a simple yet effective way to track project requirements.</p>
+            <p>Features a clean, intuitive interface with role-based access control, requirement tracking, and team collaboration tools.</p>
+            <p><strong>Features:</strong></p>
+            <ul>
+                <li>Role-based access control</li>
+                <li>Requirement tracking and versioning</li>
+                <li>Team collaboration tools</li>
+                <li>Export to multiple formats</li>
+                <li>Responsive design</li>
+            </ul>`,
+            tech: ['HTML', 'CSS', 'JavaScript', 'Web Development', 'UI/UX'],
+            github: 'https://github.com/1Baleid'
+        },
+        5: {
+            category: 'AI/ML',
+            title: 'RAG System Development',
+            description: `<p>Developed enterprise-grade Retrieval-Augmented Generation (RAG) systems during my time at Renad Al Majd Group.</p>
+            <p>Built knowledge management solutions using LangChain for orchestration and n8n for workflow automation, enabling organizations to leverage their internal documents with AI-powered search and question answering.</p>
+            <p><strong>Components:</strong></p>
+            <ul>
+                <li>Document ingestion and processing pipelines</li>
+                <li>Vector database integration</li>
+                <li>LLM-powered query understanding</li>
+                <li>Automated workflow triggers with n8n</li>
+            </ul>`,
+            tech: ['LangChain', 'RAG', 'n8n', 'Python', 'Vector Databases'],
+            github: 'https://github.com/1Baleid'
+        },
+        6: {
+            category: 'Research',
+            title: 'VLM Hallucination Research',
+            description: `<p>Research project at SDAIA-KFUPM Joint Research Center for AI (JRCAI) focusing on evaluating and reducing hallucinations in Vision-Language Models.</p>
+            <p>Designing controlled experiments to detect, categorize, and mitigate hallucinations in VLMs when applied to domain-specific tasks in healthcare and education.</p>
+            <p><strong>Research Focus:</strong></p>
+            <ul>
+                <li>Hallucination detection methodologies</li>
+                <li>Domain-specific evaluation benchmarks</li>
+                <li>Mitigation strategies for VLMs</li>
+                <li>Healthcare and education applications</li>
+            </ul>
+            <p><strong>Supervisor:</strong> Dr. Muzammil Behzad</p>`,
+            tech: ['VLMs', 'Research', 'Healthcare AI', 'Python', 'Evaluation'],
+            github: 'https://github.com/1Baleid'
+        }
+    };
+
+    // Open modal function
+    function openModal(projectId) {
+        const data = projectData[projectId];
+        if (!data) return;
+
+        // Populate modal content
+        modal.querySelector('.project-modal__category').textContent = data.category;
+        modal.querySelector('.project-modal__title').textContent = data.title;
+        modal.querySelector('.project-modal__description').innerHTML = data.description;
+
+        // Populate tech tags
+        const techContainer = modal.querySelector('.project-modal__tech');
+        techContainer.innerHTML = data.tech.map(t => `<span>${t}</span>`).join('');
+
+        // Set GitHub link
+        modal.querySelector('.project-modal__github').href = data.github;
+
+        // Show modal
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    // Close modal function
+    function closeModal() {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    // Event listeners for opening modal
+    projectCards.forEach(card => {
+        card.addEventListener('click', () => {
+            const projectId = card.dataset.project;
+            openModal(projectId);
+        });
+    });
+
+    // Event listeners for closing modal
+    modalClose?.addEventListener('click', closeModal);
+    modalBackdrop?.addEventListener('click', closeModal);
+
+    // Keyboard support - Escape to close
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+            closeModal();
+        }
+    });
+}
+
+/* ------------------------------------------------
+   Certification Modal
+   ------------------------------------------------ */
+function initCertificationModal() {
+    const modal = document.getElementById('certificationModal');
+    const modalBackdrop = modal?.querySelector('.certification-modal__backdrop');
+    const modalClose = modal?.querySelector('.certification-modal__close');
+    const certCards = document.querySelectorAll('.certification-card[data-cert]');
+
+    if (!modal || certCards.length === 0) return;
+
+    // Certification data with placeholder images (user will add their own)
+    const certificationData = {
+        1: {
+            date: 'Feb 2026',
+            title: 'SAP Certified Associate',
+            organization: 'SAP Generative AI Developer',
+            description: `<p>Official SAP certification demonstrating expertise in building generative AI solutions using SAP technologies.</p><p>Validates skills in developing AI-powered business applications and integrating generative AI capabilities into enterprise systems.</p>`,
+            image: '' // User will add image path
+        },
+        2: {
+            date: 'Feb 2025',
+            title: 'Advanced AI Course',
+            organization: 'KAUST',
+            description: `<p>Advanced AI certification covering Convolutional Neural Networks (CNNs) and Generative AI techniques.</p><p>Completed as part of the AI Specialist Program at King Abdullah University of Science and Technology.</p>`,
+            image: ''
+        },
+        3: {
+            date: 'Jan 2025',
+            title: 'Intro to AI Course',
+            organization: 'KAUST',
+            description: `<p>Foundational AI certification covering Linear Regression and Logistic Regression.</p><p>Completed as part of the AI Specialist Program at King Abdullah University of Science and Technology.</p>`,
+            image: ''
+        },
+        4: {
+            date: 'May 2025',
+            title: 'Certificate of Appreciation',
+            organization: 'AI League Finals - Tuwaiq Academy',
+            description: `<p>Recognition for outstanding participation and achievement in the AI League Finals competition.</p><p>Developed a smart sports camera system using YOLOv8 for real-time player tracking and automated highlight generation.</p>`,
+            image: ''
+        },
+        5: {
+            date: 'Nov 2024',
+            title: 'IELTS Band 6.5 (B2)',
+            organization: 'English Proficiency',
+            description: `<p>International English Language Testing System certification demonstrating B2 level English proficiency.</p><p>Score of 6.5 indicates upper-intermediate English skills for academic and professional contexts.</p>`,
+            image: ''
+        },
+        6: {
+            date: 'Jul 2025',
+            title: 'McKinsey Forward Program',
+            organization: 'McKinsey & Company',
+            description: `<p>Completed the McKinsey Forward program, a prestigious learning experience focused on developing problem-solving, communication, and professional skills.</p><p>Gained frameworks and methodologies used by McKinsey consultants in tackling complex business challenges.</p>`,
+            image: ''
+        },
+        7: {
+            date: 'Jun 2022',
+            title: 'Physics 101 A+ Honor',
+            organization: 'SABIC Sponsored - KFUPM Physics Department',
+            description: `<p>Academic excellence award for achieving A+ grade in Physics 101 course at KFUPM.</p><p>Sponsored by SABIC in recognition of outstanding academic performance in physics.</p>`,
+            image: ''
+        },
+        8: {
+            date: 'Jun 2022',
+            title: 'Physics 102 A+ Honor',
+            organization: 'SABIC Sponsored - KFUPM Physics Department',
+            description: `<p>Academic excellence award for achieving A+ grade in Physics 102 course at KFUPM.</p><p>Sponsored by SABIC in recognition of outstanding academic performance in physics.</p>`,
+            image: ''
+        },
+        9: {
+            date: '2025',
+            title: 'GEM FAIR 2025',
+            organization: 'Letter of Participation - NTU Singapore',
+            description: `<p>Letter of Participation from Nanyang Technological University for participating in the Global Exchange Module (GEM) Fair 2025.</p><p>Recognized as part of the exchange program experience in Singapore.</p>`,
+            image: ''
+        },
+        10: {
+            date: 'Sep 2023',
+            title: 'Community Work Fundamentals',
+            organization: 'Al Fozan Academy + Aramco',
+            description: `<p>Certification in community work fundamentals jointly offered by Al Fozan Academy and Aramco.</p><p>Covered principles of community engagement, volunteer management, and social impact initiatives.</p>`,
+            image: ''
+        }
+    };
+
+    // Open modal function
+    function openModal(certId) {
+        const data = certificationData[certId];
+        if (!data) return;
+
+        // Populate modal content
+        modal.querySelector('.certification-modal__date').textContent = data.date;
+        modal.querySelector('.certification-modal__title').textContent = data.title;
+        modal.querySelector('.certification-modal__organization').textContent = data.organization;
+        modal.querySelector('.certification-modal__description').innerHTML = data.description;
+
+        // Handle image
+        const imageContainer = modal.querySelector('.certification-modal__image');
+        if (data.image) {
+            imageContainer.innerHTML = `<img src="${data.image}" alt="${data.title}">`;
+        } else {
+            imageContainer.innerHTML = `
+                <div class="certification-modal__image-placeholder">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
+                    </svg>
+                </div>`;
+        }
+
+        // Show modal with animation
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    // Close modal function
+    function closeModal() {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    // Event listeners for opening modal
+    certCards.forEach(card => {
+        card.addEventListener('click', () => {
+            const certId = card.dataset.cert;
+            openModal(certId);
+        });
+    });
+
+    // Event listeners for closing modal
+    modalClose?.addEventListener('click', closeModal);
+    modalBackdrop?.addEventListener('click', closeModal);
+
+    // Keyboard support - Escape to close
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+            closeModal();
+        }
+    });
+}
+
+// Initialize certification modal
+initCertificationModal();
 
 /* ------------------------------------------------
    Scroll-triggered animations for footer
