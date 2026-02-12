@@ -705,17 +705,33 @@ button {
     pointer-events: none;
     white-space: nowrap;
     will-change: transform, opacity;
+    width: 100%;
+    text-align: center;
+    overflow: hidden;
 }
 
 .hero__arabic-text {
     font-family: 'Palestine', 'Traditional Arabic', sans-serif;
-    font-size: clamp(8rem, 25vw, 22rem);
+    font-size: clamp(3rem, 20vw, 22rem);
     font-weight: normal;
     line-height: 1;
     color: rgba(255, 107, 107, 0.18);
     direction: rtl;
     user-select: none;
     letter-spacing: 0.02em;
+}
+
+/* Arabic text responsive scaling */
+@media (max-width: 768px) {
+    .hero__arabic-text {
+        font-size: clamp(2.5rem, 18vw, 8rem);
+    }
+}
+
+@media (max-width: 480px) {
+    .hero__arabic-text {
+        font-size: clamp(2rem, 15vw, 5rem);
+    }
 }
 
 .hero__particles {
