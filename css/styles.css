@@ -708,17 +708,20 @@ button {
     width: 100%;
     text-align: center;
     overflow: hidden;
+    padding: 0 2rem;
+    box-sizing: border-box;
 }
 
 .hero__arabic-text {
     font-family: 'Palestine', 'Traditional Arabic', sans-serif;
     font-size: clamp(3rem, 20vw, 22rem);
     font-weight: normal;
-    line-height: 1;
+    line-height: 1.2;
     color: rgba(255, 107, 107, 0.18);
     direction: rtl;
     user-select: none;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.05em;
+    padding: 1rem 0;
 }
 
 /* Arabic text responsive scaling */
