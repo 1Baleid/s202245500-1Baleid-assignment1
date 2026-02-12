@@ -1,0 +1,257 @@
+This is written as an agent-style system instruction, so Claude understands what to build, how to structure it, and how to style it.
+
+🔧 Instruction for Claude Code: Portfolio Website Build
+Goal
+
+Create a personal portfolio website for Abdullah Baleid, based on the attached CV, that blends:
+
+Follow.art’s minimal, content-first elegance
+
+LandoNorris.com’s scroll-driven, cinematic storytelling
+
+The result should feel premium, modern, and intentional, not like a generic student portfolio.
+
+🧠 Overall UX Concept
+
+Treat the website as a guided narrative, not a list of sections.
+
+Use scroll as the main interaction driver (like landonorris.com).
+
+Use clean layouts, whitespace, and restrained UI (like follow.art).
+
+Prioritize clarity, confidence, and credibility over visual noise.
+
+🎨 Visual Language & Style
+Global Style
+
+Dark mode default with subtle accent color (soft neon green / electric blue).
+
+Large typography with strong hierarchy.
+
+Minimal UI chrome (no heavy borders, no boxed layouts).
+
+Smooth easing animations (no aggressive motion).
+
+Motion Principles
+
+Subtle fades, vertical reveals, and parallax for content sections.
+
+Scroll-triggered transitions between major sections.
+
+Hover effects that reveal information, not distract.
+
+🧱 Page Structure & Section-by-Section Instructions
+1️⃣ Hero Section (Narrative Intro – Lando Norris inspired)
+
+Purpose: Establish identity and confidence immediately.
+
+Layout & Behavior
+
+Full-screen hero.
+
+Large headline with animated text reveal.
+
+Minimal supporting subtitle.
+
+Scroll hint (↓).
+
+Content
+
+Name: Abdullah Baleid
+
+Title:
+AI Engineer · Software Engineer · Research-Oriented
+
+Short identity line:
+
+“Building intelligent systems at the intersection of AI, engineering, and research.”
+
+Interaction
+
+Text animates in on load.
+
+Background subtly reacts to scroll (gradient shift or parallax).
+
+2️⃣ About / Education (Follow.art minimalism)
+
+Purpose: Establish academic credibility without overwhelming text.
+
+Layout
+
+Two-column layout on desktop, stacked on mobile.
+
+Generous whitespace.
+
+Content
+
+KFUPM Software Engineering (GPA 3.86)
+
+NTU Exchange (AI & CS)
+
+Highlight:
+
+“First KFUPM student selected to represent the university at NTU Singapore.”
+
+Interaction
+
+Each education block fades in individually.
+
+No cards — keep it clean and editorial.
+
+3️⃣ Experience Timeline (Scroll Storytelling)
+
+Purpose: Show progression and leadership.
+
+Layout
+
+Vertical scroll-driven timeline.
+
+Each role appears as a focused scene, not a dense list.
+
+Sections to Include
+
+Vice President – AIFA Club
+
+SAP Generative AI Developer (Dual Study)
+
+Research Assistant – SDAIA-KFUPM JRCAI
+
+Technical Lead Intern – Arkan
+
+AI Engineer Trainee – Renad Al Majd
+
+Peer Tutor – KFUPM
+
+Interaction
+
+One role highlighted at a time.
+
+Scroll locks briefly to emphasize each role (Lando Norris style).
+
+Short, impact-focused bullet points only.
+
+4️⃣ Projects Section (Follow.art gallery-inspired)
+
+Purpose: Let projects speak visually and technically.
+
+Layout
+
+Grid or masonry layout.
+
+Large project cards with image or abstract visual placeholder.
+
+Projects
+
+Smart Sports Camera (YOLOv8)
+
+LLM Human Preference Prediction
+
+Oxford Flowers Image Classification
+
+Each Project Card
+
+Title
+
+One-line problem statement
+
+Tech stack
+
+“View details” hover reveal
+
+Interaction
+
+Hover = reveal overlay (follow.art style).
+
+Click = modal or dedicated project view.
+
+5️⃣ Research & Achievements (Credibility Section)
+
+Purpose: Separate Abdullah from typical portfolios.
+
+Content
+
+KAUST MENA ML Winter School (13.5% acceptance)
+
+SDAIA Research on LLM/VLM hallucination
+
+Certifications (SAP, KAUST, McKinsey Forward)
+
+Layout
+
+Minimal list with emphasis on selectivity and prestige.
+
+Use subtle icons or typography contrast.
+
+6️⃣ Skills (Structured, Not Icon Spam)
+
+Purpose: Show depth, not buzzwords.
+
+Categories
+
+AI / ML
+
+Programming
+
+Consulting & Strategy
+
+Soft Skills
+
+Languages
+
+Interaction
+
+Expand-on-hover or scroll reveal per category.
+
+No progress bars.
+
+7️⃣ Closing Section (Call to Action)
+
+Purpose: End with clarity and confidence.
+
+Content
+
+Short statement:
+
+“Currently building AI systems across research, industry, and consulting.”
+
+Contact links:
+
+Email
+
+LinkedIn
+
+Interaction
+
+Smooth fade-in.
+
+Minimal footer, no clutter.
+
+🛠 Technical Constraints
+
+Use React or Next.js
+
+Tailwind CSS preferred
+
+Animation via GSAP or Framer Motion
+
+Fully responsive
+
+Clean component structure
+
+Performance-conscious (lazy loading, optimized animations)
+
+🚫 What to Avoid
+
+No generic “About Me” blocks
+
+No skill bars
+
+No overcrowded cards
+
+No excessive animations
+
+No copying layouts directly from reference sites
+
+🧩 Design Philosophy Summary (for Claude)
+
+“Design this portfolio like a calm, confident story — minimal like follow.art, cinematic like landonorris.com — where every scroll reveals intention, not noise.”
