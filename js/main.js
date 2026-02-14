@@ -3,6 +3,9 @@
    Advanced GSAP Animations & Premium Interactions
    ================================================ */
 
+// Register GSAP plugins
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+
 // Wait for DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize all modules
@@ -723,14 +726,27 @@ function initSmoothScroll() {
 
             const offsetTop = target.offsetTop - 80;
 
-            gsap.to(window, {
-                duration: 1.2,
-                scrollTo: {
-                    y: offsetTop,
-                    autoKill: false
-                },
-                ease: 'power3.inOut'
-            });
+            // Try GSAP ScrollToPlugin first, fallback to native scroll
+            try {
+                if (typeof ScrollToPlugin !== 'undefined') {
+                    gsap.to(window, {
+                        duration: 1.2,
+                        scrollTo: {
+                            y: offsetTop,
+                            autoKill: false
+                        },
+                        ease: 'power3.inOut'
+                    });
+                } else {
+                    throw new Error('ScrollToPlugin not available');
+                }
+            } catch (error) {
+                // Fallback to native smooth scroll
+                window.scrollTo({
+                    top: offsetTop,
+                    behavior: 'smooth'
+                });
+            }
         });
     });
 }
@@ -971,74 +987,98 @@ function initExperienceModal() {
             date: 'Jan 2026 - May 2026',
             title: 'Research Assistant',
             company: 'SDAIA-KFUPM Joint Research Center for AI (JRCAI)',
-            description: `<p><strong>Project:</strong> Evaluating VLMs/LLMs Hallucination in Domain-Specific Tasks</p><p>Selected due to academic excellence. Designing controlled experiments to detect, categorize, and reduce hallucinations in Vision-Language Models for healthcare and education domains.</p><p><strong>Supervisor:</strong> Dr. Muzammil Behzad</p>`
+            description: `<p><strong>Project:</strong> Evaluating VLMs/LLMs Hallucination in Domain-Specific Tasks</p><p>Selected due to academic excellence. Designing controlled experiments to detect, categorize, and reduce hallucinations in Vision-Language Models for healthcare and education domains.</p><p><strong>Supervisor:</strong> Dr. Muzammil Behzad</p>`,
+            cardImage: '',
+            modalImage: ''
         },
         2: {
             date: 'Oct 2025 - Present',
             title: 'SAP Generative AI Developer',
             company: 'SAP | Dual Study Program | Saudi Arabia',
-            description: `<p>Part of SAP's prestigious Dual Study Program, working on Generative AI solutions for enterprise applications.</p><p>Earned <strong>SAP Certified Associate</strong> certification in Generative AI Development (2025), demonstrating expertise in building AI-powered business solutions.</p>`
+            description: `<p>Part of SAP's prestigious Dual Study Program, working on Generative AI solutions for enterprise applications.</p><p>Earned <strong>SAP Certified Associate</strong> certification in Generative AI Development (2025), demonstrating expertise in building AI-powered business solutions.</p>`,
+            cardImage: '',
+            modalImage: ''
         },
         3: {
             date: 'Aug 2025 - Present',
             title: 'Technical Lead Intern',
             company: 'Arkan | Remote',
-            description: `<p>Worked on building a construction management SaaS platform.</p><p>Bridged business priorities with technical design, ensuring strategic alignment.</p><p>Advised leadership by combining technical expertise with understanding of business needs.</p>`
+            description: `<p>Worked on building a construction management SaaS platform.</p><p>Bridged business priorities with technical design, ensuring strategic alignment.</p><p>Advised leadership by combining technical expertise with understanding of business needs.</p>`,
+            cardImage: '',
+            modalImage: ''
         },
         4: {
             date: 'Jan 2026',
             title: 'MENA ML Winter School 2026 Scholar',
             company: 'King Abdullah University of Science and Technology (KAUST) | Thuwal, Saudi Arabia',
-            description: `<p>Selected among <strong>300 participants from 2,222 applicants</strong> (13.5% acceptance rate) for the prestigious ML school hosted by King Abdullah University of Science and Technology.</p><p>Featured lectures by <strong>Google DeepMind researchers</strong> covering cutting-edge machine learning topics.</p>`
+            description: `<p>Selected among <strong>300 participants from 2,222 applicants</strong> (13.5% acceptance rate) for the prestigious ML school hosted by King Abdullah University of Science and Technology.</p><p>Featured lectures by <strong>Google DeepMind researchers</strong> covering cutting-edge machine learning topics.</p>`,
+            cardImage: '',
+            modalImage: ''
         },
         5: {
             date: 'Jun 2025 - Aug 2025',
             title: 'AI Engineer Trainee',
             company: 'Renad Al Majd Group | Riyadh, Saudi Arabia',
-            description: `<p>Developed Retrieval-Augmented Generation (RAG) systems using <strong>LangChain & n8n</strong> for enterprise knowledge management and automation solutions.</p><p>Gained hands-on experience building production-ready AI systems for real business applications.</p>`
+            description: `<p>Developed Retrieval-Augmented Generation (RAG) systems using <strong>LangChain & n8n</strong> for enterprise knowledge management and automation solutions.</p><p>Gained hands-on experience building production-ready AI systems for real business applications.</p>`,
+            cardImage: '',
+            modalImage: ''
         },
         6: {
             date: 'Jun 2025 - Aug 2025',
             title: 'Project Management Assistant',
             company: 'Code Link | Riyadh, Saudi Arabia',
-            description: `<p>Coordinated project tasks, deliverables, and stakeholder communication.</p><p>Gained valuable experience in project coordination and cross-functional team collaboration.</p>`
+            description: `<p>Coordinated project tasks, deliverables, and stakeholder communication.</p><p>Gained valuable experience in project coordination and cross-functional team collaboration.</p>`,
+            cardImage: '',
+            modalImage: ''
         },
         7: {
             date: 'Aug 2024 - Present',
             title: 'Peer Tutor',
             company: 'Assistant Deanship of Student Excellence and Success (SES) | KFUPM, Dhahran',
-            description: `<p>Delivered <strong>140+ tutoring hours</strong> across 5 courses:</p><ul><li>ICS 108 - Object-Oriented Programming</li><li>ICS 253 - Discrete Structures</li><li>MATH 106 - Applied Calculus</li><li>ISE 291 - Introduction to Data Science</li><li>COE 292 - Introduction to Artificial Intelligence</li></ul>`
+            description: `<p>Delivered <strong>140+ tutoring hours</strong> across 5 courses:</p><ul><li>ICS 108 - Object-Oriented Programming</li><li>ICS 253 - Discrete Structures</li><li>MATH 106 - Applied Calculus</li><li>ISE 291 - Introduction to Data Science</li><li>COE 292 - Introduction to Artificial Intelligence</li></ul>`,
+            cardImage: '',
+            modalImage: ''
         },
         8: {
             date: 'Feb 2026 - Present',
             title: 'Vice President',
             company: 'Artificial Intelligence for All (AIFA) Club | KFUPM',
-            description: `<p>Leading initiatives to democratize AI education on campus as Vice President of the AI for All (AIFA) Club.</p><p>Organizing workshops, seminars, and hands-on sessions to help students explore and learn about artificial intelligence.</p>`
+            description: `<p>Leading initiatives to democratize AI education on campus as Vice President of the AI for All (AIFA) Club.</p><p>Organizing workshops, seminars, and hands-on sessions to help students explore and learn about artificial intelligence.</p>`,
+            cardImage: '',
+            modalImage: ''
         },
         9: {
             date: 'Mar 2025 - May 2025',
             title: 'Part Time',
             company: 'Net Zero | University Events',
-            description: `<p>Part-time role supporting university events and initiatives related to sustainability and Net Zero goals.</p><p>Gained experience in event coordination and stakeholder engagement within an academic setting.</p>`
+            description: `<p>Part-time role supporting university events and initiatives related to sustainability and Net Zero goals.</p><p>Gained experience in event coordination and stakeholder engagement within an academic setting.</p>`,
+            cardImage: '',
+            modalImage: ''
         },
         // Education
         edu1: {
             date: 'Aug 2022 - Present',
             title: 'B.S. Software Engineering',
             company: 'King Fahd University of Petroleum & Minerals (KFUPM)',
-            description: `<p><strong>GPA: 3.86/4.0</strong>, Dean's List</p><p>Pursuing a Bachelor's degree in Software Engineering at one of the top universities in the Middle East.</p><p><strong>Honors & Awards:</strong></p><ul><li>Physics 101 A+ Honor, SABIC Sponsored (Jun 2022)</li><li>Physics 102 A+ Honor, SABIC Sponsored (Jun 2022)</li></ul>`
+            description: `<p><strong>GPA: 3.86/4.0</strong>, Dean's List</p><p>Pursuing a Bachelor's degree in Software Engineering at one of the top universities in the Middle East.</p><p><strong>Honors & Awards:</strong></p><ul><li>Physics 101 A+ Honor, SABIC Sponsored (Jun 2022)</li><li>Physics 102 A+ Honor, SABIC Sponsored (Jun 2022)</li></ul>`,
+            cardImage: '',
+            modalImage: ''
         },
         edu2: {
             date: 'Aug 2025 - Jan 2026',
             title: 'Exchange Student - AI & Computer Science',
             company: 'Nanyang Technological University (NTU), Singapore',
-            description: `<p><strong>First KFUPM student</strong> chosen to represent the university in Singapore at one of Asia's top universities.</p><p>Studied Machine Learning and Deep Learning courses, gaining international exposure and building a global network in the AI community.</p><p><strong>Projects completed:</strong></p><ul><li>LLM Human Preference Prediction (SC4000 Machine Learning)</li><li>Oxford Flowers Image Classification (SC4001 Deep Learning)</li></ul><p>GEM FAIR 2025 Letter of Participation</p>`
+            description: `<p><strong>First KFUPM student</strong> chosen to represent the university in Singapore at one of Asia's top universities.</p><p>Studied Machine Learning and Deep Learning courses, gaining international exposure and building a global network in the AI community.</p><p><strong>Projects completed:</strong></p><ul><li>LLM Human Preference Prediction (SC4000 Machine Learning)</li><li>Oxford Flowers Image Classification (SC4001 Deep Learning)</li></ul><p>GEM FAIR 2025 Letter of Participation</p>`,
+            cardImage: '',
+            modalImage: ''
         },
         edu3: {
             date: 'Jan - Feb 2025',
             title: 'AI Specialist Program',
             company: 'King Abdullah University of Science and Technology (KAUST)',
-            description: `<p>Completed intensive AI specialist program at KAUST covering advanced topics in artificial intelligence.</p><p><strong>Topics Covered:</strong></p><ul><li>Intro to AI - Linear/Logistic Regression</li><li>Advanced AI - CNNs, Generative AI</li></ul><p>Gained hands-on experience with cutting-edge AI techniques from world-class researchers.</p>`
+            description: `<p>Completed intensive AI specialist program at KAUST covering advanced topics in artificial intelligence.</p><p><strong>Topics Covered:</strong></p><ul><li>Intro to AI - Linear/Logistic Regression</li><li>Advanced AI - CNNs, Generative AI</li></ul><p>Gained hands-on experience with cutting-edge AI techniques from world-class researchers.</p>`,
+            cardImage: '',
+            modalImage: ''
         }
     };
 
@@ -1052,6 +1092,19 @@ function initExperienceModal() {
         modal.querySelector('.experience-modal__title').textContent = data.title;
         modal.querySelector('.experience-modal__company').textContent = data.company;
         modal.querySelector('.experience-modal__description').innerHTML = data.description;
+
+        // Handle image
+        const imageContainer = modal.querySelector('.experience-modal__image');
+        if (data.modalImage) {
+            imageContainer.innerHTML = `<img src="${data.modalImage}" alt="${data.title}">`;
+        } else {
+            imageContainer.innerHTML = `
+                <div class="experience-modal__image-placeholder">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
+                    </svg>
+                </div>`;
+        }
 
         // Show modal with animation
         modal.classList.add('active');
@@ -1125,7 +1178,9 @@ function initProjectModal() {
                 <li>Performance analytics dashboard</li>
             </ul>`,
             tech: ['YOLOv8', 'Python', 'Computer Vision', 'OpenCV', 'PyTorch'],
-            github: 'https://github.com/1Baleid'
+            github: 'https://github.com/1Baleid',
+            cardImage: '',
+            modalImage: ''
         },
         2: {
             category: 'AI/ML',
@@ -1140,7 +1195,9 @@ function initProjectModal() {
                 <li>Ensemble methods</li>
             </ul>`,
             tech: ['LLMs', 'NLP', 'PyTorch', 'Transformers', 'Knowledge Distillation'],
-            github: 'https://github.com/1Baleid'
+            github: 'https://github.com/1Baleid',
+            cardImage: '',
+            modalImage: ''
         },
         3: {
             category: 'AI/ML',
@@ -1155,7 +1212,9 @@ function initProjectModal() {
                 <li>Hyperparameter optimization</li>
             </ul>`,
             tech: ['PyTorch', 'CNN', 'Deep Learning', 'Transfer Learning', 'Computer Vision'],
-            github: 'https://github.com/1Baleid'
+            github: 'https://github.com/1Baleid',
+            cardImage: '',
+            modalImage: ''
         },
         4: {
             category: 'Web Development',
@@ -1171,7 +1230,9 @@ function initProjectModal() {
                 <li>Responsive design</li>
             </ul>`,
             tech: ['HTML', 'CSS', 'JavaScript', 'Web Development', 'UI/UX'],
-            github: 'https://github.com/1Baleid'
+            github: 'https://github.com/1Baleid',
+            cardImage: '',
+            modalImage: ''
         },
         5: {
             category: 'AI/ML',
@@ -1186,7 +1247,9 @@ function initProjectModal() {
                 <li>Automated workflow triggers with n8n</li>
             </ul>`,
             tech: ['LangChain', 'RAG', 'n8n', 'Python', 'Vector Databases'],
-            github: 'https://github.com/1Baleid'
+            github: 'https://github.com/1Baleid',
+            cardImage: '',
+            modalImage: ''
         },
         6: {
             category: 'Research',
@@ -1202,7 +1265,9 @@ function initProjectModal() {
             </ul>
             <p><strong>Supervisor:</strong> Dr. Muzammil Behzad</p>`,
             tech: ['VLMs', 'Research', 'Healthcare AI', 'Python', 'Evaluation'],
-            github: 'https://github.com/1Baleid'
+            github: 'https://github.com/1Baleid',
+            cardImage: '',
+            modalImage: ''
         }
     };
 
@@ -1215,6 +1280,19 @@ function initProjectModal() {
         modal.querySelector('.project-modal__category').textContent = data.category;
         modal.querySelector('.project-modal__title').textContent = data.title;
         modal.querySelector('.project-modal__description').innerHTML = data.description;
+
+        // Handle image
+        const imageContainer = modal.querySelector('.project-modal__image');
+        if (data.modalImage) {
+            imageContainer.innerHTML = `<img src="${data.modalImage}" alt="${data.title}">`;
+        } else {
+            imageContainer.innerHTML = `
+                <div class="project-modal__image-placeholder">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
+                    </svg>
+                </div>`;
+        }
 
         // Populate tech tags
         const techContainer = modal.querySelector('.project-modal__tech');
@@ -1272,70 +1350,80 @@ function initCertificationModal() {
             title: 'SAP Certified Associate',
             organization: 'SAP Generative AI Developer',
             description: `<p>Official SAP certification demonstrating expertise in building generative AI solutions using SAP technologies.</p><p>Validates skills in developing AI-powered business applications and integrating generative AI capabilities into enterprise systems.</p>`,
-            image: '' // User will add image path
+            cardImage: '',
+            modalImage: ''
         },
         2: {
             date: 'Feb 2025',
             title: 'Advanced AI Course',
             organization: 'KAUST',
             description: `<p>Advanced AI certification covering Convolutional Neural Networks (CNNs) and Generative AI techniques.</p><p>Completed as part of the AI Specialist Program at King Abdullah University of Science and Technology.</p>`,
-            image: ''
+            cardImage: '',
+            modalImage: ''
         },
         3: {
             date: 'Jan 2025',
             title: 'Intro to AI Course',
             organization: 'KAUST',
             description: `<p>Foundational AI certification covering Linear Regression and Logistic Regression.</p><p>Completed as part of the AI Specialist Program at King Abdullah University of Science and Technology.</p>`,
-            image: ''
+            cardImage: '',
+            modalImage: ''
         },
         4: {
             date: 'May 2025',
             title: 'Certificate of Appreciation',
             organization: 'AI League Finals - Tuwaiq Academy',
             description: `<p>Recognition for outstanding participation and achievement in the AI League Finals competition.</p><p>Developed a smart sports camera system using YOLOv8 for real-time player tracking and automated highlight generation.</p>`,
-            image: ''
+            cardImage: '',
+            modalImage: ''
         },
         5: {
             date: 'Nov 2024',
             title: 'IELTS Band 6.5 (B2)',
             organization: 'English Proficiency',
             description: `<p>International English Language Testing System certification demonstrating B2 level English proficiency.</p><p>Score of 6.5 indicates upper-intermediate English skills for academic and professional contexts.</p>`,
-            image: ''
+            cardImage: '',
+            modalImage: ''
         },
         6: {
             date: 'Jul 2025',
             title: 'McKinsey Forward Program',
             organization: 'McKinsey & Company',
             description: `<p>Completed the McKinsey Forward program, a prestigious learning experience focused on developing problem-solving, communication, and professional skills.</p><p>Gained frameworks and methodologies used by McKinsey consultants in tackling complex business challenges.</p>`,
-            image: ''
+            cardImage: '',
+            modalImage: ''
         },
         7: {
             date: 'Jun 2022',
             title: 'Physics 101 A+ Honor',
             organization: 'SABIC Sponsored - KFUPM Physics Department',
             description: `<p>Academic excellence award for achieving A+ grade in Physics 101 course at KFUPM.</p><p>Sponsored by SABIC in recognition of outstanding academic performance in physics.</p>`,
-            image: ''
+            cardImage: '',
+            modalImage: ''
         },
         8: {
             date: 'Jun 2022',
             title: 'Physics 102 A+ Honor',
             organization: 'SABIC Sponsored - KFUPM Physics Department',
             description: `<p>Academic excellence award for achieving A+ grade in Physics 102 course at KFUPM.</p><p>Sponsored by SABIC in recognition of outstanding academic performance in physics.</p>`,
-            image: ''
+            cardImage: '',
+            modalImage: ''
         },
         9: {
             date: '2025',
             title: 'GEM FAIR 2025',
             organization: 'Letter of Participation - NTU Singapore',
             description: `<p>Letter of Participation from Nanyang Technological University for participating in the Global Exchange Module (GEM) Fair 2025.</p><p>Recognized as part of the exchange program experience in Singapore.</p>`,
-            image: ''
+            cardImage: '',
+            modalImage: ''
         },
         10: {
             date: 'Sep 2023',
             title: 'Community Work Fundamentals',
             organization: 'Al Fozan Academy + Aramco',
             description: `<p>Certification in community work fundamentals jointly offered by Al Fozan Academy and Aramco.</p><p>Covered principles of community engagement, volunteer management, and social impact initiatives.</p>`,
-            image: ''
+            cardImage: '',
+            modalImage: ''
         }
     };
 
@@ -1352,8 +1440,8 @@ function initCertificationModal() {
 
         // Handle image
         const imageContainer = modal.querySelector('.certification-modal__image');
-        if (data.image) {
-            imageContainer.innerHTML = `<img src="${data.image}" alt="${data.title}">`;
+        if (data.modalImage) {
+            imageContainer.innerHTML = `<img src="${data.modalImage}" alt="${data.title}">`;
         } else {
             imageContainer.innerHTML = `
                 <div class="certification-modal__image-placeholder">
