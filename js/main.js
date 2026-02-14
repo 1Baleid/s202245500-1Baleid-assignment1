@@ -462,32 +462,30 @@ function initScrollProgress() {
    Scroll Reveal Animations
    ------------------------------------------------ */
 function initScrollReveal() {
-    // Reveal elements on scroll
+    // Reveal elements on scroll - faster animations
     const revealElements = document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right');
 
     revealElements.forEach(element => {
-        const direction = element.classList.contains('reveal-left') ? -100 :
-                         element.classList.contains('reveal-right') ? 100 : 0;
+        const direction = element.classList.contains('reveal-left') ? -30 :
+                         element.classList.contains('reveal-right') ? 30 : 0;
 
         gsap.set(element, {
             opacity: 0,
             x: direction,
-            y: element.classList.contains('reveal-up') ? 80 : 0
+            y: element.classList.contains('reveal-up') ? 30 : 0
         });
 
         gsap.to(element, {
             scrollTrigger: {
                 trigger: element,
-                start: 'top 85%',
-                end: 'top 50%',
+                start: 'top 90%',
                 toggleActions: 'play none none none'
             },
             opacity: 1,
             x: 0,
             y: 0,
-            duration: 1,
-            delay: parseFloat(getComputedStyle(element).getPropertyValue('--delay') || 0),
-            ease: 'power3.out'
+            duration: 0.4,
+            ease: 'power2.out'
         });
     });
 
@@ -495,18 +493,18 @@ function initScrollReveal() {
     const projectRows = document.querySelectorAll('.project-row');
 
     projectRows.forEach((row, index) => {
-        gsap.set(row, { opacity: 0, y: 30 });
+        gsap.set(row, { opacity: 0, y: 20 });
 
         gsap.to(row, {
             scrollTrigger: {
                 trigger: row,
-                start: 'top 90%',
+                start: 'top 95%',
                 toggleActions: 'play none none none'
             },
             opacity: 1,
             y: 0,
-            duration: 0.5,
-            delay: index * 0.1,
+            duration: 0.3,
+            delay: index * 0.05,
             ease: 'power2.out'
         });
     });
@@ -789,32 +787,7 @@ function initTiltCards() {
    Parallax Effects
    ------------------------------------------------ */
 function initParallaxEffects() {
-    // Parallax for about image
-    gsap.to('.about__image-wrapper', {
-        scrollTrigger: {
-            trigger: '.about',
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: 1
-        },
-        y: -50,
-        rotation: -3
-    });
-
-    // Section reveal animations
-    const sections = document.querySelectorAll('section');
-    sections.forEach(section => {
-        gsap.from(section, {
-            scrollTrigger: {
-                trigger: section,
-                start: 'top 95%',
-                toggleActions: 'play none none none'
-            },
-            opacity: 0.5,
-            duration: 1,
-            ease: 'power2.out'
-        });
-    });
+    // Simplified - removed heavy scrub animations for better performance
 }
 
 /* ------------------------------------------------

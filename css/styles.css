@@ -3011,8 +3011,9 @@ button {
     :root {
         --fs-6xl: 2.5rem;
         --fs-5xl: 2rem;
-        --space-5xl: 4rem;
-        --space-4xl: 3rem;
+        --space-5xl: 2.5rem;
+        --space-4xl: 2rem;
+        --space-3xl: 1.5rem;
     }
 
     .hero {
