@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initScrollProgress();
     initScrollReveal();
     initProjectFilter();
-    // Contact form removed - using simple contact info
+    initContactForm();
     initCounterAnimation();
     initParticles();
     initSmoothScroll();
@@ -973,7 +973,7 @@ function initExperienceModal() {
             title: 'Research Assistant',
             company: 'SDAIA-KFUPM Joint Research Center for AI (JRCAI)',
             description: `<p><strong>Project:</strong> Evaluating VLMs/LLMs Hallucination in Domain-Specific Tasks</p><p>Selected due to academic excellence. Designing controlled experiments to detect, categorize, and reduce hallucinations in Vision-Language Models for healthcare and education domains.</p><p><strong>Supervisor:</strong> Dr. Muzammil Behzad</p>`,
-            cardImage: 'Images/Sdaia-JRCAI.png',
+            cardImage: 'assets/images/Sdaia-JRCAI.png',
             modalImage: ''
         },
         2: {
@@ -989,7 +989,7 @@ function initExperienceModal() {
             title: 'Technical Lead Intern',
             company: 'Arkan | Remote',
             description: `<p>Worked on building a construction management SaaS platform.</p><p>Bridged business priorities with technical design, ensuring strategic alignment.</p><p>Advised leadership by combining technical expertise with understanding of business needs.</p>`,
-            cardImage: 'Images/Arkan.png',
+            cardImage: 'assets/images/Arkan.png',
             modalImage: ''
         },
         4: {
@@ -1013,7 +1013,7 @@ function initExperienceModal() {
             title: 'Project Management Assistant',
             company: 'Code Link | Riyadh, Saudi Arabia',
             description: `<p>Coordinated project tasks, deliverables, and stakeholder communication.</p><p>Gained valuable experience in project coordination and cross-functional team collaboration.</p>`,
-            cardImage: 'Images/Codelink.png',
+            cardImage: 'assets/images/Codelink.png',
             modalImage: ''
         },
         7: {
@@ -1021,7 +1021,7 @@ function initExperienceModal() {
             title: 'Peer Tutor',
             company: 'Assistant Deanship of Student Excellence and Success (SES) | KFUPM, Dhahran',
             description: `<p>Delivered <strong>140+ tutoring hours</strong> across 5 courses:</p><ul><li>ICS 108 - Object-Oriented Programming</li><li>ICS 253 - Discrete Structures</li><li>MATH 106 - Applied Calculus</li><li>ISE 291 - Introduction to Data Science</li><li>COE 292 - Introduction to Artificial Intelligence</li></ul>`,
-            cardImage: 'Images/KFUPM SES.png',
+            cardImage: 'assets/images/KFUPM SES.png',
             modalImage: ''
         },
         8: {
@@ -1029,7 +1029,7 @@ function initExperienceModal() {
             title: 'Vice President',
             company: 'Artificial Intelligence for All (AIFA) Club | KFUPM',
             description: `<p>Leading initiatives to democratize AI education on campus as Vice President of the AI for All (AIFA) Club.</p><p>Organizing workshops, seminars, and hands-on sessions to help students explore and learn about artificial intelligence.</p>`,
-            cardImage: 'Images/AIFA Club.png',
+            cardImage: 'assets/images/AIFA Club.png',
             modalImage: ''
         },
         9: {
@@ -1037,7 +1037,7 @@ function initExperienceModal() {
             title: 'Part Time',
             company: 'Net Zero | University Events',
             description: `<p>Part-time role supporting university events and initiatives related to sustainability and Net Zero goals.</p><p>Gained experience in event coordination and stakeholder engagement within an academic setting.</p>`,
-            cardImage: 'Images/netZero.png',
+            cardImage: 'assets/images/netZero.png',
             modalImage: ''
         },
         // Education
@@ -1295,15 +1295,15 @@ function initProjectModal() {
 function initCardImages() {
     // Experience data for card images (same as in initExperienceModal)
     const experienceCardImages = {
-        1: 'Images/Sdaia-JRCAI.png',
+        1: 'assets/images/Sdaia-JRCAI.png',
         2: 'https://cdn.prod.website-files.com/66c8945bfb638155af230df6/66d5e83a7965368cd3bef0d4_SAP.png',
-        3: 'Images/Arkan.png',
+        3: 'assets/images/Arkan.png',
         4: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTte2-ZT_JSzcLjafdArm65XeFSrpA4sFkTdw&s',
         5: 'https://www.rmg-sa.com/wp-content/uploads/2023/10/512.jpg',
-        6: 'Images/Codelink.png',
-        7: 'Images/KFUPM SES.png',
-        8: 'Images/AIFA Club.png',
-        9: 'Images/netZero.png',
+        6: 'assets/images/Codelink.png',
+        7: 'assets/images/KFUPM SES.png',
+        8: 'assets/images/AIFA Club.png',
+        9: 'assets/images/netZero.png',
         edu1: 'https://argaamplus.s3.amazonaws.com/be72021d-9734-4f0f-bb5d-dd27b437b815.png',
         edu2: 'https://i0.wp.com/postgrad.com.sg/wp-content/uploads/2019/10/NTU-School-Cover-Image-01.png?resize=760%2C497&ssl=1',
         edu3: 'https://media.licdn.com/dms/image/v2/C5610AQFzWKdrzdRvPw/videocover-high/videocover-high/0/1702853309863/Kaust_Squaremp4?e=2147483647&v=beta&t=W7wZnYa2j-jU4-cgIMv47qmaLWfPtBc-_ppCWejUqjo'
@@ -1316,10 +1316,10 @@ function initCardImages() {
         3: 'https://media.licdn.com/dms/image/v2/D4D2DAQGOPOWmgv2UGA/profile-treasury-document-images_1280/B4DZX5uyxpGwAY-/1/1743651551471?e=1772064000&v=beta&t=KvVei5Y2ceXAeoCDF-wIQsnlcskwRStxMvYM7DxrBYU',
         4: 'https://media.licdn.com/dms/image/v2/D4D2DAQFVRLgetZJy-g/profile-treasury-image-shrink_800_800/B4DZbPfpVbGwAY-/0/1747237903123?e=1771671600&v=beta&t=G3cx-wdeyzhh06BkhO8vcei9Sa6x0OrV5Y_9EsBVrRo',
         5: 'https://media.licdn.com/dms/image/v2/D4D2DAQFFEsiGl6PbgA/profile-treasury-image-shrink_1280_1280/B4DZaxD5GRG8AQ-/0/1746727311944?e=1771671600&v=beta&t=tjWH8fbOP3sE0Ola3dgGgLI3pcLBwokKDXGkUxuyvl0',
-        6: 'Images/mckinseyForward.png',
-        7: 'Images/A+Phys101.jpg',
-        8: 'Images/A+Phys102.jpg',
-        9: 'Images/GemFair.png',
+        6: 'assets/images/mckinseyForward.png',
+        7: 'assets/images/A+Phys101.jpg',
+        8: 'assets/images/A+Phys102.jpg',
+        9: 'assets/images/GemFair.png',
         10: 'https://media.licdn.com/dms/image/v2/D4D2DAQH_iCuDAyiFyQ/profile-treasury-image-shrink_800_800/B4DZapAyQ.G4AY-/0/1746592278979?e=1771671600&v=beta&t=rHubdSi8VhHGcQF6N9xzce-RRXmTESvU-KHohpO0kUk',
         11: 'https://media.licdn.com/dms/image/v2/D4E2DAQFzsI1Pl5-6TQ/profile-treasury-image-shrink_1280_1280/B4EZw_As1sKAAQ-/0/1770583675605?e=1771671600&v=beta&t=a8e6jiM-qJ81Mxdos0CoQOgEFnZyah5lBdr3FZIBbHM'
     };
@@ -1423,7 +1423,7 @@ function initCertificationModal() {
             title: 'McKinsey Forward Program',
             organization: 'McKinsey & Company',
             description: `<p>Completed the McKinsey Forward program, a prestigious learning experience focused on developing problem-solving, communication, and professional skills.</p><p>Gained frameworks and methodologies used by McKinsey consultants in tackling complex business challenges.</p>`,
-            cardImage: 'Images/mckinseyForward.png',
+            cardImage: 'assets/images/mckinseyForward.png',
             modalImage: ''
         },
         7: {
@@ -1431,7 +1431,7 @@ function initCertificationModal() {
             title: 'Physics 101 A+ Honor',
             organization: 'SABIC Sponsored - KFUPM Physics Department',
             description: `<p>Academic excellence award for achieving A+ grade in Physics 101 course at KFUPM.</p><p>Sponsored by SABIC in recognition of outstanding academic performance in physics.</p>`,
-            cardImage: 'Images/A+Phys101.jpg',
+            cardImage: 'assets/images/A+Phys101.jpg',
             modalImage: ''
         },
         8: {
@@ -1439,7 +1439,7 @@ function initCertificationModal() {
             title: 'Physics 102 A+ Honor',
             organization: 'SABIC Sponsored - KFUPM Physics Department',
             description: `<p>Academic excellence award for achieving A+ grade in Physics 102 course at KFUPM.</p><p>Sponsored by SABIC in recognition of outstanding academic performance in physics.</p>`,
-            cardImage: 'Images/A+Phys102.jpg',
+            cardImage: 'assets/images/A+Phys102.jpg',
             modalImage: ''
         },
         9: {
@@ -1447,7 +1447,7 @@ function initCertificationModal() {
             title: 'GEM FAIR 2025',
             organization: 'Letter of Participation - NTU Singapore',
             description: `<p>Letter of Participation from Nanyang Technological University for participating in the Global Exchange Module (GEM) Fair 2025.</p><p>Recognized as part of the exchange program experience in Singapore.</p>`,
-            cardImage: 'Images/GemFair.png',
+            cardImage: 'assets/images/GemFair.png',
             modalImage: ''
         },
         10: {

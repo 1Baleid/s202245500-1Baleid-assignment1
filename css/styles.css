@@ -2489,25 +2489,129 @@ button {
 }
 
 /* ------------------------------------------------
-   Contact Section (Simplified)
+   Contact Section
    ------------------------------------------------ */
 .contact {
-    padding: var(--space-4xl) 0;
+    padding: var(--space-5xl) 0;
     position: relative;
 }
 
-.contact__simple {
-    max-width: 600px;
+.contact__content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3xl);
+    max-width: 1000px;
     margin: 0 auto;
+}
+
+/* Contact Form */
+.contact__form-wrapper {
+    position: relative;
+}
+
+.contact__form {
+    background: var(--bg-glass);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-xl);
+    padding: var(--space-2xl);
+}
+
+.form-group {
+    margin-bottom: var(--space-lg);
+}
+
+.form-label {
+    display: block;
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-medium);
+    color: var(--text-primary);
+    margin-bottom: var(--space-sm);
+}
+
+.form-input {
+    width: 100%;
+    padding: var(--space-md) var(--space-lg);
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    font-size: var(--fs-base);
+    font-family: inherit;
+    transition: all var(--transition-fast);
+}
+
+.form-input::placeholder {
+    color: var(--text-muted);
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 20px var(--accent-glow);
+}
+
+.form-textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.form-success {
+    position: absolute;
+    inset: 0;
+    background: var(--bg-secondary);
+    border-radius: var(--radius-xl);
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-md);
     text-align: center;
 }
 
-.contact__info-row {
+.form-success.show {
     display: flex;
+}
+
+.form-success svg {
+    width: 60px;
+    height: 60px;
+    color: var(--accent);
+}
+
+.form-success p {
+    font-size: var(--fs-lg);
+    font-weight: var(--fw-semibold);
+    color: var(--text-primary);
+}
+
+/* Contact Info */
+.contact__info {
+    display: flex;
+    flex-direction: column;
     justify-content: center;
-    gap: var(--space-2xl);
+}
+
+.contact__info-title {
+    font-family: var(--font-display);
+    font-size: var(--fs-2xl);
+    font-weight: var(--fw-bold);
+    margin-bottom: var(--space-md);
+    color: var(--text-primary);
+}
+
+.contact__info-text {
+    font-size: var(--fs-base);
+    color: var(--text-secondary);
     margin-bottom: var(--space-xl);
-    flex-wrap: wrap;
+    line-height: 1.7;
+}
+
+.contact__info-items {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
 }
 
 .contact__info-item {
@@ -2521,6 +2625,7 @@ button {
     width: 24px;
     height: 24px;
     color: var(--accent);
+    flex-shrink: 0;
 }
 
 .contact__info-item a {
@@ -2540,37 +2645,56 @@ button {
 
 .contact__socials {
     display: flex;
-    justify-content: center;
-    gap: var(--space-lg);
+    gap: var(--space-md);
 }
 
 .contact__social-link {
+    width: 50px;
+    height: 50px;
     display: flex;
     align-items: center;
-    gap: var(--space-sm);
-    padding: var(--space-md) var(--space-lg);
+    justify-content: center;
     background: var(--bg-glass);
     border: 1px solid var(--border-color);
-    border-radius: var(--radius-lg);
-    color: var(--text-primary);
-    text-decoration: none;
+    border-radius: var(--radius-md);
+    color: var(--text-secondary);
     transition: all 0.3s ease;
 }
 
 .contact__social-link svg {
-    width: 20px;
-    height: 20px;
-}
-
-.contact__social-link span {
-    font-size: var(--fs-sm);
-    font-weight: var(--fw-medium);
+    width: 22px;
+    height: 22px;
 }
 
 .contact__social-link:hover {
     border-color: var(--accent);
     color: var(--accent);
+    background: var(--accent-subtle);
     transform: translateY(-3px);
+}
+
+/* Contact Responsive */
+@media (max-width: 768px) {
+    .contact__content {
+        grid-template-columns: 1fr;
+        gap: var(--space-2xl);
+    }
+
+    .contact__form {
+        padding: var(--space-lg);
+    }
+
+    .contact__info {
+        text-align: center;
+    }
+
+    .contact__info-items {
+        align-items: center;
+    }
+
+    .contact__socials {
+        justify-content: center;
+    }
 }
 
 /* ------------------------------------------------
