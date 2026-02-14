@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initJourneySection();
     initExperienceModal();
     initProjectModal();
+    initCardImages();
 });
 
 /* ------------------------------------------------
@@ -972,7 +973,7 @@ function initExperienceModal() {
             title: 'Research Assistant',
             company: 'SDAIA-KFUPM Joint Research Center for AI (JRCAI)',
             description: `<p><strong>Project:</strong> Evaluating VLMs/LLMs Hallucination in Domain-Specific Tasks</p><p>Selected due to academic excellence. Designing controlled experiments to detect, categorize, and reduce hallucinations in Vision-Language Models for healthcare and education domains.</p><p><strong>Supervisor:</strong> Dr. Muzammil Behzad</p>`,
-            cardImage: '',
+            cardImage: 'Images/Sdaia-JRCAI.png',
             modalImage: ''
         },
         2: {
@@ -980,7 +981,7 @@ function initExperienceModal() {
             title: 'SAP Generative AI Developer',
             company: 'SAP | Dual Study Program | Saudi Arabia',
             description: `<p>Part of SAP's prestigious Dual Study Program, working on Generative AI solutions for enterprise applications.</p><p>Earned <strong>SAP Certified Associate</strong> certification in Generative AI Development (2025), demonstrating expertise in building AI-powered business solutions.</p>`,
-            cardImage: '',
+            cardImage: 'https://cdn.prod.website-files.com/66c8945bfb638155af230df6/66d5e83a7965368cd3bef0d4_SAP.png',
             modalImage: ''
         },
         3: {
@@ -988,7 +989,7 @@ function initExperienceModal() {
             title: 'Technical Lead Intern',
             company: 'Arkan | Remote',
             description: `<p>Worked on building a construction management SaaS platform.</p><p>Bridged business priorities with technical design, ensuring strategic alignment.</p><p>Advised leadership by combining technical expertise with understanding of business needs.</p>`,
-            cardImage: '',
+            cardImage: 'Images/Arkan.png',
             modalImage: ''
         },
         4: {
@@ -996,7 +997,7 @@ function initExperienceModal() {
             title: 'MENA ML Winter School 2026 Scholar',
             company: 'King Abdullah University of Science and Technology (KAUST) | Thuwal, Saudi Arabia',
             description: `<p>Selected among <strong>300 participants from 2,222 applicants</strong> (13.5% acceptance rate) for the prestigious ML school hosted by King Abdullah University of Science and Technology.</p><p>Featured lectures by <strong>Google DeepMind researchers</strong> covering cutting-edge machine learning topics.</p>`,
-            cardImage: '',
+            cardImage: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTte2-ZT_JSzcLjafdArm65XeFSrpA4sFkTdw&s',
             modalImage: ''
         },
         5: {
@@ -1004,7 +1005,7 @@ function initExperienceModal() {
             title: 'AI Engineer Trainee',
             company: 'Renad Al Majd Group | Riyadh, Saudi Arabia',
             description: `<p>Developed Retrieval-Augmented Generation (RAG) systems using <strong>LangChain & n8n</strong> for enterprise knowledge management and automation solutions.</p><p>Gained hands-on experience building production-ready AI systems for real business applications.</p>`,
-            cardImage: '',
+            cardImage: 'https://www.rmg-sa.com/wp-content/uploads/2023/10/512.jpg',
             modalImage: ''
         },
         6: {
@@ -1012,7 +1013,7 @@ function initExperienceModal() {
             title: 'Project Management Assistant',
             company: 'Code Link | Riyadh, Saudi Arabia',
             description: `<p>Coordinated project tasks, deliverables, and stakeholder communication.</p><p>Gained valuable experience in project coordination and cross-functional team collaboration.</p>`,
-            cardImage: '',
+            cardImage: 'Images/Codelink.png',
             modalImage: ''
         },
         7: {
@@ -1020,7 +1021,7 @@ function initExperienceModal() {
             title: 'Peer Tutor',
             company: 'Assistant Deanship of Student Excellence and Success (SES) | KFUPM, Dhahran',
             description: `<p>Delivered <strong>140+ tutoring hours</strong> across 5 courses:</p><ul><li>ICS 108 - Object-Oriented Programming</li><li>ICS 253 - Discrete Structures</li><li>MATH 106 - Applied Calculus</li><li>ISE 291 - Introduction to Data Science</li><li>COE 292 - Introduction to Artificial Intelligence</li></ul>`,
-            cardImage: '',
+            cardImage: 'Images/KFUPM SES.png',
             modalImage: ''
         },
         8: {
@@ -1028,7 +1029,7 @@ function initExperienceModal() {
             title: 'Vice President',
             company: 'Artificial Intelligence for All (AIFA) Club | KFUPM',
             description: `<p>Leading initiatives to democratize AI education on campus as Vice President of the AI for All (AIFA) Club.</p><p>Organizing workshops, seminars, and hands-on sessions to help students explore and learn about artificial intelligence.</p>`,
-            cardImage: '',
+            cardImage: 'Images/AIFA Club.png',
             modalImage: ''
         },
         9: {
@@ -1036,7 +1037,7 @@ function initExperienceModal() {
             title: 'Part Time',
             company: 'Net Zero | University Events',
             description: `<p>Part-time role supporting university events and initiatives related to sustainability and Net Zero goals.</p><p>Gained experience in event coordination and stakeholder engagement within an academic setting.</p>`,
-            cardImage: '',
+            cardImage: 'Images/netZero.png',
             modalImage: ''
         },
         // Education
@@ -1045,7 +1046,7 @@ function initExperienceModal() {
             title: 'B.S. Software Engineering',
             company: 'King Fahd University of Petroleum & Minerals (KFUPM)',
             description: `<p><strong>GPA: 3.86/4.0</strong>, Dean's List</p><p>Pursuing a Bachelor's degree in Software Engineering at one of the top universities in the Middle East.</p><p><strong>Honors & Awards:</strong></p><ul><li>Physics 101 A+ Honor, SABIC Sponsored (Jun 2022)</li><li>Physics 102 A+ Honor, SABIC Sponsored (Jun 2022)</li></ul>`,
-            cardImage: '',
+            cardImage: 'https://argaamplus.s3.amazonaws.com/be72021d-9734-4f0f-bb5d-dd27b437b815.png',
             modalImage: ''
         },
         edu2: {
@@ -1053,7 +1054,7 @@ function initExperienceModal() {
             title: 'Exchange Student - AI & Computer Science',
             company: 'Nanyang Technological University (NTU), Singapore',
             description: `<p><strong>First KFUPM student</strong> chosen to represent the university in Singapore at one of Asia's top universities.</p><p>Studied Machine Learning and Deep Learning courses, gaining international exposure and building a global network in the AI community.</p><p><strong>Projects completed:</strong></p><ul><li>LLM Human Preference Prediction (SC4000 Machine Learning)</li><li>Oxford Flowers Image Classification (SC4001 Deep Learning)</li></ul><p>GEM FAIR 2025 Letter of Participation</p>`,
-            cardImage: '',
+            cardImage: 'https://i0.wp.com/postgrad.com.sg/wp-content/uploads/2019/10/NTU-School-Cover-Image-01.png?resize=760%2C497&ssl=1',
             modalImage: ''
         },
         edu3: {
@@ -1061,7 +1062,7 @@ function initExperienceModal() {
             title: 'AI Specialist Program',
             company: 'King Abdullah University of Science and Technology (KAUST)',
             description: `<p>Completed intensive AI specialist program at KAUST covering advanced topics in artificial intelligence.</p><p><strong>Topics Covered:</strong></p><ul><li>Intro to AI - Linear/Logistic Regression</li><li>Advanced AI - CNNs, Generative AI</li></ul><p>Gained hands-on experience with cutting-edge AI techniques from world-class researchers.</p>`,
-            cardImage: '',
+            cardImage: 'https://media.licdn.com/dms/image/v2/C5610AQFzWKdrzdRvPw/videocover-high/videocover-high/0/1702853309863/Kaust_Squaremp4?e=2147483647&v=beta&t=W7wZnYa2j-jU4-cgIMv47qmaLWfPtBc-_ppCWejUqjo',
             modalImage: ''
         }
     };
@@ -1288,6 +1289,83 @@ function initProjectModal() {
 }
 
 /* ------------------------------------------------
+   Card Images Initialization
+   Loads images from data objects into card containers
+   ------------------------------------------------ */
+function initCardImages() {
+    // Experience data for card images (same as in initExperienceModal)
+    const experienceCardImages = {
+        1: 'Images/Sdaia-JRCAI.png',
+        2: 'https://cdn.prod.website-files.com/66c8945bfb638155af230df6/66d5e83a7965368cd3bef0d4_SAP.png',
+        3: 'Images/Arkan.png',
+        4: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTte2-ZT_JSzcLjafdArm65XeFSrpA4sFkTdw&s',
+        5: 'https://www.rmg-sa.com/wp-content/uploads/2023/10/512.jpg',
+        6: 'Images/Codelink.png',
+        7: 'Images/KFUPM SES.png',
+        8: 'Images/AIFA Club.png',
+        9: 'Images/netZero.png',
+        edu1: 'https://argaamplus.s3.amazonaws.com/be72021d-9734-4f0f-bb5d-dd27b437b815.png',
+        edu2: 'https://i0.wp.com/postgrad.com.sg/wp-content/uploads/2019/10/NTU-School-Cover-Image-01.png?resize=760%2C497&ssl=1',
+        edu3: 'https://media.licdn.com/dms/image/v2/C5610AQFzWKdrzdRvPw/videocover-high/videocover-high/0/1702853309863/Kaust_Squaremp4?e=2147483647&v=beta&t=W7wZnYa2j-jU4-cgIMv47qmaLWfPtBc-_ppCWejUqjo'
+    };
+
+    // Certification data for card images (same as in initCertificationModal)
+    const certificationCardImages = {
+        1: 'https://media.licdn.com/dms/image/v2/D4E2DAQF57QCnL6IqZg/profile-treasury-document-images_1280/B4EZw3xPwlIkAU-/1/1770462185971?e=1772064000&v=beta&t=QlZIDxbqF4A7lyS7WuPdAsFx6mISBc00bsg1MLUjsmY',
+        2: 'https://media.licdn.com/dms/image/v2/D4D2DAQH99wuPJnGt7w/profile-treasury-document-images_1280/B4DZX5vJ1OG8AY-/1/1743651645702?e=1772064000&v=beta&t=9XGS3-URBzvV-yOVOil7dpK1AxZI4Rhcqq5dwR9BYLE',
+        3: 'https://media.licdn.com/dms/image/v2/D4D2DAQGOPOWmgv2UGA/profile-treasury-document-images_1280/B4DZX5uyxpGwAY-/1/1743651551471?e=1772064000&v=beta&t=KvVei5Y2ceXAeoCDF-wIQsnlcskwRStxMvYM7DxrBYU',
+        4: 'https://media.licdn.com/dms/image/v2/D4D2DAQFVRLgetZJy-g/profile-treasury-image-shrink_800_800/B4DZbPfpVbGwAY-/0/1747237903123?e=1771671600&v=beta&t=G3cx-wdeyzhh06BkhO8vcei9Sa6x0OrV5Y_9EsBVrRo',
+        5: 'https://media.licdn.com/dms/image/v2/D4D2DAQFFEsiGl6PbgA/profile-treasury-image-shrink_1280_1280/B4DZaxD5GRG8AQ-/0/1746727311944?e=1771671600&v=beta&t=tjWH8fbOP3sE0Ola3dgGgLI3pcLBwokKDXGkUxuyvl0',
+        6: 'Images/mckinseyForward.png',
+        7: 'Images/A+Phys101.jpg',
+        8: 'Images/A+Phys102.jpg',
+        9: 'Images/GemFair.png',
+        10: 'https://media.licdn.com/dms/image/v2/D4D2DAQH_iCuDAyiFyQ/profile-treasury-image-shrink_800_800/B4DZapAyQ.G4AY-/0/1746592278979?e=1771671600&v=beta&t=rHubdSi8VhHGcQF6N9xzce-RRXmTESvU-KHohpO0kUk',
+        11: 'https://media.licdn.com/dms/image/v2/D4E2DAQFzsI1Pl5-6TQ/profile-treasury-image-shrink_1280_1280/B4EZw_As1sKAAQ-/0/1770583675605?e=1771671600&v=beta&t=a8e6jiM-qJ81Mxdos0CoQOgEFnZyah5lBdr3FZIBbHM'
+    };
+
+    // Load experience timeline card images
+    document.querySelectorAll('.experience-timeline__item[data-experience]').forEach(item => {
+        const id = item.dataset.experience;
+        const imagePath = experienceCardImages[id];
+        if (imagePath) {
+            const container = item.querySelector('.experience-timeline__card-image');
+            if (container) {
+                container.innerHTML = `<img src="${imagePath}" alt="Card image" style="width:100%;height:100%;object-fit:cover;border-radius:8px;">`;
+            }
+        }
+    });
+
+    // Load journey/education card images
+    document.querySelectorAll('.journey__card[data-experience]').forEach(card => {
+        const id = card.dataset.experience;
+        const imagePath = experienceCardImages[id];
+        if (imagePath) {
+            const container = card.querySelector('.journey__card-image');
+            if (container) {
+                container.innerHTML = `<img src="${imagePath}" alt="Card image" style="width:100%;height:100%;object-fit:cover;border-radius:8px;">`;
+            }
+        }
+    });
+
+    // Load certification card images
+    document.querySelectorAll('.certification-card[data-cert]').forEach(card => {
+        const id = card.dataset.cert;
+        const imagePath = certificationCardImages[id];
+        if (imagePath) {
+            // Check if image container exists, create if not
+            let container = card.querySelector('.certification-card__image');
+            if (!container) {
+                container = document.createElement('div');
+                container.className = 'certification-card__image';
+                card.insertBefore(container, card.firstChild);
+            }
+            container.innerHTML = `<img src="${imagePath}" alt="Card image" style="width:100%;height:100%;object-fit:cover;border-radius:8px;">`;
+        }
+    });
+}
+
+/* ------------------------------------------------
    Certification Modal
    ------------------------------------------------ */
 function initCertificationModal() {
@@ -1298,14 +1376,14 @@ function initCertificationModal() {
 
     if (!modal || certCards.length === 0) return;
 
-    // Certification data with placeholder images (user will add their own)
+    // Certification data with images
     const certificationData = {
         1: {
             date: 'Feb 2026',
             title: 'SAP Certified Associate',
             organization: 'SAP Generative AI Developer',
             description: `<p>Official SAP certification demonstrating expertise in building generative AI solutions using SAP technologies.</p><p>Validates skills in developing AI-powered business applications and integrating generative AI capabilities into enterprise systems.</p>`,
-            cardImage: '',
+            cardImage: 'https://media.licdn.com/dms/image/v2/D4E2DAQF57QCnL6IqZg/profile-treasury-document-images_1280/B4EZw3xPwlIkAU-/1/1770462185971?e=1772064000&v=beta&t=QlZIDxbqF4A7lyS7WuPdAsFx6mISBc00bsg1MLUjsmY',
             modalImage: ''
         },
         2: {
@@ -1313,7 +1391,7 @@ function initCertificationModal() {
             title: 'Advanced AI Course',
             organization: 'KAUST',
             description: `<p>Advanced AI certification covering Convolutional Neural Networks (CNNs) and Generative AI techniques.</p><p>Completed as part of the AI Specialist Program at King Abdullah University of Science and Technology.</p>`,
-            cardImage: '',
+            cardImage: 'https://media.licdn.com/dms/image/v2/D4D2DAQH99wuPJnGt7w/profile-treasury-document-images_1280/B4DZX5vJ1OG8AY-/1/1743651645702?e=1772064000&v=beta&t=9XGS3-URBzvV-yOVOil7dpK1AxZI4Rhcqq5dwR9BYLE',
             modalImage: ''
         },
         3: {
@@ -1321,7 +1399,7 @@ function initCertificationModal() {
             title: 'Intro to AI Course',
             organization: 'KAUST',
             description: `<p>Foundational AI certification covering Linear Regression and Logistic Regression.</p><p>Completed as part of the AI Specialist Program at King Abdullah University of Science and Technology.</p>`,
-            cardImage: '',
+            cardImage: 'https://media.licdn.com/dms/image/v2/D4D2DAQGOPOWmgv2UGA/profile-treasury-document-images_1280/B4DZX5uyxpGwAY-/1/1743651551471?e=1772064000&v=beta&t=KvVei5Y2ceXAeoCDF-wIQsnlcskwRStxMvYM7DxrBYU',
             modalImage: ''
         },
         4: {
@@ -1329,7 +1407,7 @@ function initCertificationModal() {
             title: 'Certificate of Appreciation',
             organization: 'AI League Finals - Tuwaiq Academy',
             description: `<p>Recognition for outstanding participation and achievement in the AI League Finals competition.</p><p>Developed a smart sports camera system using YOLOv8 for real-time player tracking and automated highlight generation.</p>`,
-            cardImage: '',
+            cardImage: 'https://media.licdn.com/dms/image/v2/D4D2DAQFVRLgetZJy-g/profile-treasury-image-shrink_800_800/B4DZbPfpVbGwAY-/0/1747237903123?e=1771671600&v=beta&t=G3cx-wdeyzhh06BkhO8vcei9Sa6x0OrV5Y_9EsBVrRo',
             modalImage: ''
         },
         5: {
@@ -1337,7 +1415,7 @@ function initCertificationModal() {
             title: 'IELTS Band 6.5 (B2)',
             organization: 'English Proficiency',
             description: `<p>International English Language Testing System certification demonstrating B2 level English proficiency.</p><p>Score of 6.5 indicates upper-intermediate English skills for academic and professional contexts.</p>`,
-            cardImage: '',
+            cardImage: 'https://media.licdn.com/dms/image/v2/D4D2DAQFFEsiGl6PbgA/profile-treasury-image-shrink_1280_1280/B4DZaxD5GRG8AQ-/0/1746727311944?e=1771671600&v=beta&t=tjWH8fbOP3sE0Ola3dgGgLI3pcLBwokKDXGkUxuyvl0',
             modalImage: ''
         },
         6: {
@@ -1345,7 +1423,7 @@ function initCertificationModal() {
             title: 'McKinsey Forward Program',
             organization: 'McKinsey & Company',
             description: `<p>Completed the McKinsey Forward program, a prestigious learning experience focused on developing problem-solving, communication, and professional skills.</p><p>Gained frameworks and methodologies used by McKinsey consultants in tackling complex business challenges.</p>`,
-            cardImage: '',
+            cardImage: 'Images/mckinseyForward.png',
             modalImage: ''
         },
         7: {
@@ -1353,7 +1431,7 @@ function initCertificationModal() {
             title: 'Physics 101 A+ Honor',
             organization: 'SABIC Sponsored - KFUPM Physics Department',
             description: `<p>Academic excellence award for achieving A+ grade in Physics 101 course at KFUPM.</p><p>Sponsored by SABIC in recognition of outstanding academic performance in physics.</p>`,
-            cardImage: '',
+            cardImage: 'Images/A+Phys101.jpg',
             modalImage: ''
         },
         8: {
@@ -1361,7 +1439,7 @@ function initCertificationModal() {
             title: 'Physics 102 A+ Honor',
             organization: 'SABIC Sponsored - KFUPM Physics Department',
             description: `<p>Academic excellence award for achieving A+ grade in Physics 102 course at KFUPM.</p><p>Sponsored by SABIC in recognition of outstanding academic performance in physics.</p>`,
-            cardImage: '',
+            cardImage: 'Images/A+Phys102.jpg',
             modalImage: ''
         },
         9: {
@@ -1369,7 +1447,7 @@ function initCertificationModal() {
             title: 'GEM FAIR 2025',
             organization: 'Letter of Participation - NTU Singapore',
             description: `<p>Letter of Participation from Nanyang Technological University for participating in the Global Exchange Module (GEM) Fair 2025.</p><p>Recognized as part of the exchange program experience in Singapore.</p>`,
-            cardImage: '',
+            cardImage: 'Images/GemFair.png',
             modalImage: ''
         },
         10: {
@@ -1377,7 +1455,7 @@ function initCertificationModal() {
             title: 'Community Work Fundamentals',
             organization: 'Al Fozan Academy + Aramco',
             description: `<p>Certification in community work fundamentals jointly offered by Al Fozan Academy and Aramco.</p><p>Covered principles of community engagement, volunteer management, and social impact initiatives.</p>`,
-            cardImage: '',
+            cardImage: 'https://media.licdn.com/dms/image/v2/D4D2DAQH_iCuDAyiFyQ/profile-treasury-image-shrink_800_800/B4DZapAyQ.G4AY-/0/1746592278979?e=1771671600&v=beta&t=rHubdSi8VhHGcQF6N9xzce-RRXmTESvU-KHohpO0kUk',
             modalImage: ''
         },
         11: {
@@ -1385,7 +1463,7 @@ function initCertificationModal() {
             title: 'MENA Machine Learning Winter School 2026',
             organization: 'King Abdullah University of Science and Technology (KAUST)',
             description: `<p>Certificate of Participation for active participation and successful completion of the <strong>MENA Machine Learning Winter School 2026 (MenaML)</strong>.</p><p>Held at King Abdullah University of Science and Technology, Saudi Arabia, from <strong>24 - 29 January 2026</strong>.</p><p>Selected among <strong>300 participants from 2,222 applicants</strong> (13.5% acceptance rate) for this prestigious ML school.</p><p>Featured lectures by <strong>Google DeepMind researchers</strong> covering cutting-edge machine learning topics.</p><p><strong>Directors:</strong> Dr. Safa Messaoud, Maria Abi</p>`,
-            cardImage: '',
+            cardImage: 'https://media.licdn.com/dms/image/v2/D4E2DAQFzsI1Pl5-6TQ/profile-treasury-image-shrink_1280_1280/B4EZw_As1sKAAQ-/0/1770583675605?e=1771671600&v=beta&t=a8e6jiM-qJ81Mxdos0CoQOgEFnZyah5lBdr3FZIBbHM',
             modalImage: ''
         }
     };
