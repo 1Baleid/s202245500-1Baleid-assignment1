@@ -1408,6 +1408,14 @@ function initCertificationModal() {
             description: `<p>Certification in community work fundamentals jointly offered by Al Fozan Academy and Aramco.</p><p>Covered principles of community engagement, volunteer management, and social impact initiatives.</p>`,
             cardImage: '',
             modalImage: ''
+        },
+        11: {
+            date: 'Jan 2026',
+            title: 'MENA Machine Learning Winter School 2026',
+            organization: 'King Abdullah University of Science and Technology (KAUST)',
+            description: `<p>Certificate of Participation for active participation and successful completion of the <strong>MENA Machine Learning Winter School 2026 (MenaML)</strong>.</p><p>Held at King Abdullah University of Science and Technology, Saudi Arabia, from <strong>24 - 29 January 2026</strong>.</p><p>Selected among <strong>300 participants from 2,222 applicants</strong> (13.5% acceptance rate) for this prestigious ML school.</p><p>Featured lectures by <strong>Google DeepMind researchers</strong> covering cutting-edge machine learning topics.</p><p><strong>Directors:</strong> Dr. Safa Messaoud, Maria Abi</p>`,
+            cardImage: '',
+            modalImage: ''
         }
     };
 
@@ -1805,6 +1813,41 @@ function initImageAttachmentMode() {
         return null;
     }
 
+    // Watch for modals opening and apply saved modal images
+    function setupModalObservers() {
+        const modals = [
+            { el: document.getElementById('experienceModal'), type: 'experience', getIdFn: getCurrentExperienceId },
+            { el: document.getElementById('projectModal'), type: 'project', getIdFn: getCurrentProjectId },
+            { el: document.getElementById('certificationModal'), type: 'certification', getIdFn: getCurrentCertId }
+        ];
+
+        modals.forEach(({ el, type, getIdFn }) => {
+            if (!el) return;
+
+            const observer = new MutationObserver((mutations) => {
+                mutations.forEach((mutation) => {
+                    if (mutation.attributeName === 'class' && el.classList.contains('active')) {
+                        // Modal just opened, check for saved image
+                        setTimeout(() => {
+                            const id = getIdFn();
+                            if (id) {
+                                const savedPath = getSavedModalImage(type, id);
+                                if (savedPath) {
+                                    updateModalImage(type, savedPath);
+                                }
+                            }
+                        }, 50);
+                    }
+                });
+            });
+
+            observer.observe(el, { attributes: true, attributeFilter: ['class'] });
+        });
+    }
+
+    // Initialize modal observers
+    setupModalObservers();
+
     function showAttachDialog(type, id, target) {
         const overlay = document.createElement('div');
         overlay.className = 'attach-overlay';
@@ -1865,8 +1908,48 @@ function initImageAttachmentMode() {
         setTimeout(() => input.focus(), 100);
     }
 
+    // Storage key for persisting images
+    const STORAGE_KEY = 'dev_attached_images';
+
+    // Load saved images from localStorage
+    function loadSavedImages() {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (!saved) return;
+
+        try {
+            const images = JSON.parse(saved);
+            Object.entries(images).forEach(([key, path]) => {
+                const [type, id, target] = key.split('_');
+                if (target === 'card') {
+                    updateCardImage(type, id, path);
+                }
+                // Modal images are loaded when modal opens
+            });
+            console.log('%c Loaded saved images from localStorage ', 'background: #8b5cf6; color: white; padding: 4px 8px; border-radius: 4px;');
+        } catch (e) {
+            console.error('Error loading saved images:', e);
+        }
+    }
+
+    // Get saved modal image for a specific item
+    function getSavedModalImage(type, id) {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (!saved) return null;
+        try {
+            const images = JSON.parse(saved);
+            return images[`${type}_${id}_modal`] || null;
+        } catch (e) {
+            return null;
+        }
+    }
+
     function saveImagePath(type, id, target, path) {
         const imageKey = target === 'card' ? 'cardImage' : 'modalImage';
+
+        // Save to localStorage for persistence
+        const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+        saved[`${type}_${id}_${target}`] = path;
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(saved));
 
         // Log the update for easy copy-paste
         console.log(`%c IMAGE PATH UPDATE `, 'background: #3b82f6; color: white; padding: 4px 8px; border-radius: 4px;');
@@ -1881,6 +1964,40 @@ function initImageAttachmentMode() {
             updateModalImage(type, path);
         }
     }
+
+    // Export all saved images (call this in console when done)
+    window.exportSavedImages = function() {
+        const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+        console.log('%c ALL SAVED IMAGE PATHS ', 'background: #10b981; color: white; padding: 4px 8px; border-radius: 4px;');
+        console.log('Copy these into your data objects:\n');
+
+        const byType = { experience: {}, project: {}, certification: {} };
+        Object.entries(saved).forEach(([key, path]) => {
+            const [type, id, target] = key.split('_');
+            if (!byType[type][id]) byType[type][id] = {};
+            byType[type][id][target === 'card' ? 'cardImage' : 'modalImage'] = path;
+        });
+
+        Object.entries(byType).forEach(([type, items]) => {
+            if (Object.keys(items).length > 0) {
+                console.log(`\n// ${type}Data updates:`);
+                Object.entries(items).forEach(([id, images]) => {
+                    Object.entries(images).forEach(([key, path]) => {
+                        console.log(`${type}Data['${id}'].${key} = '${path}';`);
+                    });
+                });
+            }
+        });
+
+        return saved;
+    };
+
+    // Clear all saved images
+    window.clearSavedImages = function() {
+        localStorage.removeItem(STORAGE_KEY);
+        console.log('%c Cleared all saved images ', 'background: #ef4444; color: white; padding: 4px 8px; border-radius: 4px;');
+        console.log('Refresh the page to see the changes.');
+    };
 
     function updateCardImage(type, id, path) {
         let container;
@@ -1933,7 +2050,16 @@ function initImageAttachmentMode() {
         }
     }
 
+    // Load saved images on init
+    loadSavedImages();
+
     console.log('%c DEV MODE: Image Attachment Enabled ', 'background: #10b981; color: white; padding: 4px 8px; border-radius: 4px;');
     console.log('Click the blue + buttons on cards and modals to attach images.');
+    console.log('Images are now saved to localStorage and persist across refreshes!');
+    console.log('');
+    console.log('%c Commands: ', 'background: #6366f1; color: white; padding: 4px 8px; border-radius: 4px;');
+    console.log('  exportSavedImages() - Export all paths to copy into code');
+    console.log('  clearSavedImages()  - Clear all saved images');
+    console.log('');
     console.log('When done, set DEV_MODE_IMAGE_ATTACH to false in main.js');
 }
