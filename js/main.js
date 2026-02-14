@@ -1571,7 +1571,7 @@ gsap.from('.footer__social', {
    IMAGE ATTACHMENT MODE (Development Only)
    Set to false when all images are uploaded
    ------------------------------------------------ */
-const DEV_MODE_IMAGE_ATTACH = true;
+const DEV_MODE_IMAGE_ATTACH = false;
 
 if (DEV_MODE_IMAGE_ATTACH) {
     initImageAttachmentMode();
