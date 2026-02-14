@@ -67,11 +67,11 @@
     --space-sm: 0.5rem;
     --space-md: 1rem;
     --space-lg: 1.5rem;
-    --space-xl: 2rem;
-    --space-2xl: 3rem;
-    --space-3xl: 4rem;
-    --space-4xl: 6rem;
-    --space-5xl: 8rem;
+    --space-xl: 1.5rem;
+    --space-2xl: 2rem;
+    --space-3xl: 2.5rem;
+    --space-4xl: 3rem;
+    --space-5xl: 4rem;
 
     /* Layout */
     --container-max: 1400px;
@@ -515,7 +515,10 @@ button {
     position: relative;
     overflow: hidden;
     border: none;
-    cursor: none;
+    cursor: pointer;
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
 }
 
 .btn::before {
@@ -638,11 +641,11 @@ button {
    Hero Section
    ------------------------------------------------ */
 .hero {
-    min-height: 100vh;
+    min-height: 80vh;
     display: flex;
     align-items: center;
     position: relative;
-    padding: var(--space-5xl) var(--container-padding);
+    padding: var(--space-4xl) var(--container-padding);
     overflow: hidden;
 }
 
@@ -749,6 +752,8 @@ button {
     grid-template-columns: 1fr 1fr;
     gap: var(--space-4xl);
     align-items: center;
+    position: relative;
+    z-index: 10;
 }
 
 .hero__text {
@@ -1061,11 +1066,10 @@ button {
    About Section - New Premium Design
    ------------------------------------------------ */
 .about {
-    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: var(--space-5xl) var(--container-padding);
+    padding: var(--space-4xl) var(--container-padding);
     position: relative;
 }
 
@@ -1195,6 +1199,10 @@ button {
     position: relative;
     overflow: hidden;
     box-shadow: 0 10px 20px -5px var(--accent-glow);
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    z-index: 5;
 }
 
 .about__cta:hover {
@@ -3034,17 +3042,28 @@ button {
     }
 
     .btn {
-        padding: var(--space-md) var(--space-xl);
-        font-size: var(--fs-sm);
+        padding: var(--space-lg) var(--space-xl);
+        font-size: var(--fs-base);
+        min-height: 48px;
+        cursor: pointer;
     }
 
     .hero__cta {
         flex-direction: column;
         gap: var(--space-md);
+        width: 100%;
     }
 
     .hero__cta .btn {
         width: 100%;
+        justify-content: center;
+    }
+
+    .about__cta {
+        width: 100%;
+        justify-content: center;
+        padding: 1rem 2rem;
+        min-height: 48px;
     }
 
     .hero__socials {
