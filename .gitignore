@@ -1,0 +1,10 @@
+# IDE and tool directories
+.claude/
+.playwright-mcp/
+
+# Screenshots (temporary testing images in root only)
+/*.png
+
+# OS files
+.DS_Store
+Thumbs.db
