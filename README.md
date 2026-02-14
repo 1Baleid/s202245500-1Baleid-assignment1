@@ -16,7 +16,7 @@ This portfolio showcases my professional profile as a Software Engineering stude
 
 ## Live Demo
 
-[View Live Site](#) *(Add GitHub Pages or deployment link)*
+[View Live Site](https://1baleid.github.io/s202245500-1Baleid-assignment1/)
 
 ## Technology Stack
 
@@ -35,12 +35,12 @@ This portfolio showcases my professional profile as a Software Engineering stude
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/YOUR_USERNAME/id-name-assignment1.git
+git clone https://github.com/1Baleid/s202245500-1Baleid-assignment1.git
 ```
 
 2. Navigate to project folder:
 ```bash
-cd id-name-assignment1
+cd s202245500-1Baleid-assignment1
 ```
 
 3. Open in browser:
