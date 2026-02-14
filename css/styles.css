@@ -963,21 +963,6 @@ button {
     color: var(--accent);
 }
 
-/* Hero Glow Effects */
-.hero__image-glow {
-    position: absolute;
-    inset: -50px;
-    background: radial-gradient(circle, var(--accent-glow), transparent 60%);
-    z-index: -1;
-    filter: blur(60px);
-    animation: glowPulse 4s ease-in-out infinite;
-}
-
-@keyframes glowPulse {
-    0%, 100% { opacity: 0.5; transform: scale(1); }
-    50% { opacity: 0.8; transform: scale(1.1); }
-}
-
 /* Hero Scroll Indicator */
 .hero__scroll {
     position: absolute;
