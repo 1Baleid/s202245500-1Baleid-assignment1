@@ -1077,19 +1077,6 @@ function initExperienceModal() {
         modal.querySelector('.experience-modal__company').textContent = data.company;
         modal.querySelector('.experience-modal__description').innerHTML = data.description;
 
-        // Handle image
-        const imageContainer = modal.querySelector('.experience-modal__image');
-        if (data.modalImage) {
-            imageContainer.innerHTML = `<img src="${data.modalImage}" alt="${data.title}">`;
-        } else {
-            imageContainer.innerHTML = `
-                <div class="experience-modal__image-placeholder">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
-                    </svg>
-                </div>`;
-        }
-
         // Show modal with animation
         modal.classList.add('active');
         document.body.style.overflow = 'hidden';
@@ -1265,25 +1252,9 @@ function initProjectModal() {
         modal.querySelector('.project-modal__title').textContent = data.title;
         modal.querySelector('.project-modal__description').innerHTML = data.description;
 
-        // Handle image
-        const imageContainer = modal.querySelector('.project-modal__image');
-        if (data.modalImage) {
-            imageContainer.innerHTML = `<img src="${data.modalImage}" alt="${data.title}">`;
-        } else {
-            imageContainer.innerHTML = `
-                <div class="project-modal__image-placeholder">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
-                    </svg>
-                </div>`;
-        }
-
         // Populate tech tags
         const techContainer = modal.querySelector('.project-modal__tech');
         techContainer.innerHTML = data.tech.map(t => `<span>${t}</span>`).join('');
-
-        // Set GitHub link
-        modal.querySelector('.project-modal__github').href = data.github;
 
         // Show modal
         modal.classList.add('active');
@@ -1420,7 +1391,7 @@ function initCertificationModal() {
     };
 
     // Open modal function
-    function openModal(certId) {
+    function openModal(certId, cardElement) {
         const data = certificationData[certId];
         if (!data) return;
 
@@ -1430,17 +1401,17 @@ function initCertificationModal() {
         modal.querySelector('.certification-modal__organization').textContent = data.organization;
         modal.querySelector('.certification-modal__description').innerHTML = data.description;
 
-        // Handle image
+        // Handle image - get from card if available
         const imageContainer = modal.querySelector('.certification-modal__image');
-        if (data.modalImage) {
+        const cardImg = cardElement?.querySelector('img');
+
+        if (cardImg) {
+            // Use the image from the card
+            imageContainer.innerHTML = `<img src="${cardImg.src}" alt="${data.title}">`;
+        } else if (data.modalImage) {
             imageContainer.innerHTML = `<img src="${data.modalImage}" alt="${data.title}">`;
         } else {
-            imageContainer.innerHTML = `
-                <div class="certification-modal__image-placeholder">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
-                    </svg>
-                </div>`;
+            imageContainer.innerHTML = '';
         }
 
         // Show modal with animation
@@ -1458,7 +1429,7 @@ function initCertificationModal() {
     certCards.forEach(card => {
         card.addEventListener('click', () => {
             const certId = card.dataset.cert;
-            openModal(certId);
+            openModal(certId, card);
         });
     });
 
