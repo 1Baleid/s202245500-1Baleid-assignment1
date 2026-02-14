@@ -1545,68 +1545,17 @@ button {
     margin: 0 auto;
 }
 
-/* Horizontal Timeline Line */
-.experience-timeline__line {
-    position: absolute;
-    top: 85px;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, var(--accent), var(--accent-hover), var(--accent));
-    border-radius: var(--radius-full);
-    z-index: 0;
-    pointer-events: none;
-}
-
-/* Second row timeline */
-.experience-timeline__grid::after {
-    content: '';
-    position: absolute;
-    top: calc(50% + 85px);
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, var(--accent), var(--accent-hover), var(--accent));
-    border-radius: var(--radius-full);
-    z-index: 0;
-    pointer-events: none;
-}
-
 /* 4-Column Grid */
 .experience-timeline__grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: var(--space-lg);
-    position: relative;
 }
 
 /* Timeline Item */
 .experience-timeline__item {
     position: relative;
-    padding-top: 120px;
     cursor: pointer;
-}
-
-/* Timeline Dot */
-.experience-timeline__dot {
-    position: absolute;
-    top: 75px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 24px;
-    height: 24px;
-    background: var(--bg-primary);
-    border: 4px solid var(--accent);
-    border-radius: 50%;
-    z-index: 2;
-    transition: all var(--transition-fast);
-    box-shadow: 0 0 0 4px var(--bg-primary), 0 0 20px var(--accent-glow);
-}
-
-.experience-timeline__item:hover .experience-timeline__dot {
-    background: var(--accent);
-    transform: translateX(-50%) scale(1.3);
-    box-shadow: 0 0 0 4px var(--bg-primary), 0 0 30px var(--accent-glow);
 }
 
 /* Timeline Card */
@@ -1614,31 +1563,19 @@ button {
     background: var(--bg-glass);
     backdrop-filter: blur(20px);
     border: 1px solid var(--border-color);
+    border-left: 3px solid var(--accent);
     border-radius: var(--radius-lg);
     padding: var(--space-md);
     transition: all var(--transition-base);
     position: relative;
     overflow: hidden;
-    z-index: 1;
-}
-
-.experience-timeline__card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, var(--accent-subtle), transparent);
-    opacity: 0;
-    transition: opacity var(--transition-base);
 }
 
 .experience-timeline__item:hover .experience-timeline__card {
-    transform: translateY(-8px);
+    transform: translateY(-5px);
     border-color: var(--accent);
+    border-left-width: 4px;
     box-shadow: var(--shadow-lg), var(--shadow-glow-sm);
-}
-
-.experience-timeline__item:hover .experience-timeline__card::before {
-    opacity: 1;
 }
 
 /* Card Image */
@@ -2921,22 +2858,6 @@ button {
     /* Experience timeline - 2 columns on tablet */
     .experience-timeline__grid {
         grid-template-columns: repeat(2, 1fr);
-    }
-
-    .experience-timeline__line {
-        display: none;
-    }
-
-    .experience-timeline__grid::after {
-        display: none;
-    }
-
-    .experience-timeline__item {
-        padding-top: var(--space-md);
-    }
-
-    .experience-timeline__dot {
-        display: none;
     }
 
     .contact__content {
