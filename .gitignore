@@ -2,8 +2,8 @@
 .claude/
 .playwright-mcp/
 
-# Screenshots (temporary testing images)
-*.png
+# Screenshots (temporary testing images in root only)
+/*.png
 
 # OS files
 .DS_Store
