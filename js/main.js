@@ -726,27 +726,11 @@ function initSmoothScroll() {
 
             const offsetTop = target.offsetTop - 80;
 
-            // Try GSAP ScrollToPlugin first, fallback to native scroll
-            try {
-                if (typeof ScrollToPlugin !== 'undefined') {
-                    gsap.to(window, {
-                        duration: 1.2,
-                        scrollTo: {
-                            y: offsetTop,
-                            autoKill: false
-                        },
-                        ease: 'power3.inOut'
-                    });
-                } else {
-                    throw new Error('ScrollToPlugin not available');
-                }
-            } catch (error) {
-                // Fallback to native smooth scroll
-                window.scrollTo({
-                    top: offsetTop,
-                    behavior: 'smooth'
-                });
-            }
+            // Use native smooth scroll for better performance
+            window.scrollTo({
+                top: offsetTop,
+                behavior: 'smooth'
+            });
         });
     });
 }
@@ -1525,3 +1509,431 @@ gsap.from('.footer__social', {
     delay: 0.4,
     ease: 'power2.out'
 });
+
+/* ------------------------------------------------
+   IMAGE ATTACHMENT MODE (Development Only)
+   Set to false when all images are uploaded
+   ------------------------------------------------ */
+const DEV_MODE_IMAGE_ATTACH = true;
+
+if (DEV_MODE_IMAGE_ATTACH) {
+    initImageAttachmentMode();
+}
+
+function initImageAttachmentMode() {
+    // Create styles for attachment buttons
+    const style = document.createElement('style');
+    style.textContent = `
+        .attach-btn {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: rgba(59, 130, 246, 0.9);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        .attach-btn:hover {
+            background: rgba(59, 130, 246, 1);
+            transform: scale(1.1);
+        }
+        .attach-btn svg {
+            width: 16px;
+            height: 16px;
+            fill: white;
+        }
+        .attach-btn--modal {
+            top: 12px;
+            right: 12px;
+            width: 40px;
+            height: 40px;
+        }
+        .attach-btn--modal svg {
+            width: 20px;
+            height: 20px;
+        }
+        .experience-timeline__card-image,
+        .journey__card-image,
+        .project-row__image,
+        .certification-card {
+            position: relative;
+        }
+        .experience-modal__image,
+        .project-modal__image,
+        .certification-modal__image {
+            position: relative;
+        }
+        .attach-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+        }
+        .attach-dialog {
+            background: #1a1a2e;
+            border-radius: 16px;
+            padding: 32px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+        .attach-dialog__title {
+            color: white;
+            font-size: 1.25rem;
+            margin-bottom: 8px;
+        }
+        .attach-dialog__subtitle {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.875rem;
+            margin-bottom: 24px;
+        }
+        .attach-dialog__input {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 8px;
+            border: 2px solid rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.05);
+            color: white;
+            font-size: 1rem;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+        }
+        .attach-dialog__input:focus {
+            outline: none;
+            border-color: rgba(59, 130, 246, 0.5);
+        }
+        .attach-dialog__btns {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+        }
+        .attach-dialog__btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        .attach-dialog__btn--cancel {
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+        .attach-dialog__btn--cancel:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        .attach-dialog__btn--save {
+            background: rgba(59, 130, 246, 1);
+            color: white;
+        }
+        .attach-dialog__btn--save:hover {
+            background: rgba(59, 130, 246, 0.8);
+        }
+        .attach-dialog__preview {
+            margin-bottom: 16px;
+            border-radius: 8px;
+            overflow: hidden;
+            background: rgba(255,255,255,0.05);
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .attach-dialog__preview img {
+            max-width: 100%;
+            max-height: 200px;
+            object-fit: contain;
+        }
+        .attach-dialog__preview-placeholder {
+            color: rgba(255,255,255,0.3);
+            font-size: 0.875rem;
+        }
+    `;
+    document.head.appendChild(style);
+
+    // Create attach button SVG
+    const attachSvg = `<svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>`;
+
+    // Add attach buttons to experience timeline cards
+    document.querySelectorAll('.experience-timeline__card-image').forEach(container => {
+        const item = container.closest('.experience-timeline__item');
+        if (item) {
+            const btn = createAttachButton();
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                showAttachDialog('experience', item.dataset.experience, 'card');
+            });
+            container.appendChild(btn);
+        }
+    });
+
+    // Add attach buttons to journey/education cards
+    document.querySelectorAll('.journey__card-image').forEach(container => {
+        const item = container.closest('.journey__card');
+        if (item) {
+            const btn = createAttachButton();
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                showAttachDialog('experience', item.dataset.experience, 'card');
+            });
+            container.appendChild(btn);
+        }
+    });
+
+    // Add attach buttons to project cards
+    document.querySelectorAll('.project-row__image').forEach(container => {
+        const item = container.closest('.project-row');
+        if (item) {
+            const btn = createAttachButton();
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                showAttachDialog('project', item.dataset.project, 'card');
+            });
+            container.appendChild(btn);
+        }
+    });
+
+    // Add attach buttons to certification cards (they don't have image containers, so add to card)
+    document.querySelectorAll('.certification-card').forEach(card => {
+        const btn = createAttachButton();
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            showAttachDialog('certification', card.dataset.cert, 'card');
+        });
+        card.appendChild(btn);
+    });
+
+    // Add attach button to experience modal
+    const expModal = document.querySelector('.experience-modal__image');
+    if (expModal) {
+        const btn = createAttachButton(true);
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const activeId = getCurrentExperienceId();
+            if (activeId) showAttachDialog('experience', activeId, 'modal');
+        });
+        expModal.appendChild(btn);
+    }
+
+    // Add attach button to project modal
+    const projModal = document.querySelector('.project-modal__image');
+    if (projModal) {
+        const btn = createAttachButton(true);
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const activeId = getCurrentProjectId();
+            if (activeId) showAttachDialog('project', activeId, 'modal');
+        });
+        projModal.appendChild(btn);
+    }
+
+    // Add attach button to certification modal
+    const certModal = document.querySelector('.certification-modal__image');
+    if (certModal) {
+        const btn = createAttachButton(true);
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const activeId = getCurrentCertId();
+            if (activeId) showAttachDialog('certification', activeId, 'modal');
+        });
+        certModal.appendChild(btn);
+    }
+
+    function createAttachButton(isModal = false) {
+        const btn = document.createElement('button');
+        btn.className = 'attach-btn' + (isModal ? ' attach-btn--modal' : '');
+        btn.innerHTML = attachSvg;
+        btn.title = 'Attach image';
+        return btn;
+    }
+
+    function getCurrentExperienceId() {
+        const modal = document.getElementById('experienceModal');
+        if (!modal?.classList.contains('active')) return null;
+        // Find which item triggered the modal by checking the title
+        const title = modal.querySelector('.experience-modal__title')?.textContent;
+        const items = [...document.querySelectorAll('.experience-timeline__item'), ...document.querySelectorAll('.journey__card')];
+        for (const item of items) {
+            const itemTitle = item.querySelector('.experience-timeline__title, .journey__card-title')?.textContent;
+            if (itemTitle && title?.includes(itemTitle.trim())) {
+                return item.dataset.experience;
+            }
+        }
+        return null;
+    }
+
+    function getCurrentProjectId() {
+        const modal = document.getElementById('projectModal');
+        if (!modal?.classList.contains('active')) return null;
+        const title = modal.querySelector('.project-modal__title')?.textContent;
+        const cards = document.querySelectorAll('.project-row[data-project]');
+        for (const card of cards) {
+            const cardTitle = card.querySelector('.project-row__title')?.textContent;
+            if (cardTitle && title?.includes(cardTitle.trim())) {
+                return card.dataset.project;
+            }
+        }
+        return null;
+    }
+
+    function getCurrentCertId() {
+        const modal = document.getElementById('certificationModal');
+        if (!modal?.classList.contains('active')) return null;
+        const title = modal.querySelector('.certification-modal__title')?.textContent;
+        const cards = document.querySelectorAll('.certification-card[data-cert]');
+        for (const card of cards) {
+            const cardTitle = card.querySelector('.certification-card__title')?.textContent;
+            if (cardTitle && title?.includes(cardTitle.trim())) {
+                return card.dataset.cert;
+            }
+        }
+        return null;
+    }
+
+    function showAttachDialog(type, id, target) {
+        const overlay = document.createElement('div');
+        overlay.className = 'attach-overlay';
+
+        const dialog = document.createElement('div');
+        dialog.className = 'attach-dialog';
+        dialog.innerHTML = `
+            <h3 class="attach-dialog__title">Attach Image</h3>
+            <p class="attach-dialog__subtitle">${type.charAt(0).toUpperCase() + type.slice(1)} #${id} - ${target === 'card' ? 'Card Image' : 'Modal Image'}</p>
+            <div class="attach-dialog__preview">
+                <span class="attach-dialog__preview-placeholder">Image preview will appear here</span>
+            </div>
+            <input type="text" class="attach-dialog__input" placeholder="Enter image path (e.g., images/photo.jpg or https://...)" />
+            <div class="attach-dialog__btns">
+                <button class="attach-dialog__btn attach-dialog__btn--cancel">Cancel</button>
+                <button class="attach-dialog__btn attach-dialog__btn--save">Save</button>
+            </div>
+        `;
+
+        overlay.appendChild(dialog);
+        document.body.appendChild(overlay);
+
+        const input = dialog.querySelector('.attach-dialog__input');
+        const preview = dialog.querySelector('.attach-dialog__preview');
+        const cancelBtn = dialog.querySelector('.attach-dialog__btn--cancel');
+        const saveBtn = dialog.querySelector('.attach-dialog__btn--save');
+
+        // Preview image on input
+        input.addEventListener('input', () => {
+            const path = input.value.trim();
+            if (path) {
+                preview.innerHTML = `<img src="${path}" alt="Preview" onerror="this.parentElement.innerHTML='<span class=\\'attach-dialog__preview-placeholder\\'>Invalid image path</span>'" />`;
+            } else {
+                preview.innerHTML = `<span class="attach-dialog__preview-placeholder">Image preview will appear here</span>`;
+            }
+        });
+
+        // Cancel
+        cancelBtn.addEventListener('click', () => {
+            overlay.remove();
+        });
+
+        // Close on overlay click
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) overlay.remove();
+        });
+
+        // Save
+        saveBtn.addEventListener('click', () => {
+            const path = input.value.trim();
+            if (path) {
+                saveImagePath(type, id, target, path);
+                overlay.remove();
+            }
+        });
+
+        // Focus input
+        setTimeout(() => input.focus(), 100);
+    }
+
+    function saveImagePath(type, id, target, path) {
+        const imageKey = target === 'card' ? 'cardImage' : 'modalImage';
+
+        // Log the update for easy copy-paste
+        console.log(`%c IMAGE PATH UPDATE `, 'background: #3b82f6; color: white; padding: 4px 8px; border-radius: 4px;');
+        console.log(`Type: ${type}, ID: ${id}, Target: ${target}`);
+        console.log(`Path: "${path}"`);
+        console.log(`Update the data object: ${type}Data[${id}].${imageKey} = '${path}'`);
+
+        // Update the card image display
+        if (target === 'card') {
+            updateCardImage(type, id, path);
+        } else {
+            updateModalImage(type, path);
+        }
+    }
+
+    function updateCardImage(type, id, path) {
+        let container;
+
+        if (type === 'experience') {
+            const item = document.querySelector(`.experience-timeline__item[data-experience="${id}"]`) ||
+                        document.querySelector(`.journey__card[data-experience="${id}"]`);
+            container = item?.querySelector('.experience-timeline__card-image, .journey__card-image');
+        } else if (type === 'project') {
+            const item = document.querySelector(`.project-row[data-project="${id}"]`);
+            container = item?.querySelector('.project-row__image');
+        } else if (type === 'certification') {
+            // Certifications don't have card images currently, but we can add one
+            const card = document.querySelector(`.certification-card[data-cert="${id}"]`);
+            if (card) {
+                let imgContainer = card.querySelector('.certification-card__image');
+                if (!imgContainer) {
+                    imgContainer = document.createElement('div');
+                    imgContainer.className = 'certification-card__image';
+                    card.insertBefore(imgContainer, card.firstChild);
+                }
+                container = imgContainer;
+            }
+        }
+
+        if (container) {
+            // Keep the attach button
+            const attachBtn = container.querySelector('.attach-btn');
+            container.innerHTML = `<img src="${path}" alt="Card image" style="width:100%;height:100%;object-fit:cover;border-radius:8px;">`;
+            if (attachBtn) container.appendChild(attachBtn);
+        }
+    }
+
+    function updateModalImage(type, path) {
+        let container;
+
+        if (type === 'experience') {
+            container = document.querySelector('.experience-modal__image');
+        } else if (type === 'project') {
+            container = document.querySelector('.project-modal__image');
+        } else if (type === 'certification') {
+            container = document.querySelector('.certification-modal__image');
+        }
+
+        if (container) {
+            // Keep the attach button
+            const attachBtn = container.querySelector('.attach-btn');
+            container.innerHTML = `<img src="${path}" alt="Modal image" style="width:100%;height:100%;object-fit:contain;">`;
+            if (attachBtn) container.appendChild(attachBtn);
+        }
+    }
+
+    console.log('%c DEV MODE: Image Attachment Enabled ', 'background: #10b981; color: white; padding: 4px 8px; border-radius: 4px;');
+    console.log('Click the blue + buttons on cards and modals to attach images.');
+    console.log('When done, set DEV_MODE_IMAGE_ATTACH to false in main.js');
+}
