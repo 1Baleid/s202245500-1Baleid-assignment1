@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initExperienceModal();
     initProjectModal();
     initCardImages();
+    initThemeToggle();
 });
 
 /* ------------------------------------------------
@@ -519,7 +520,45 @@ function initScrollReveal() {
    Project Filter (Disabled - using simple list now)
    ------------------------------------------------ */
 function initProjectFilter() {
-    // Filter removed - projects displayed as simple list
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const projectRows = document.querySelectorAll('.project-row');
+
+    if (!filterButtons.length || !projectRows.length) return;
+
+    filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            // Remove active class from all buttons
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            // Add active class to clicked button
+            button.classList.add('active');
+
+            const filterValue = button.getAttribute('data-filter');
+
+            projectRows.forEach(row => {
+                const category = row.querySelector('.project-row__category').textContent;
+
+                if (filterValue === 'all' || category === filterValue) {
+                    // Show with animation
+                    gsap.to(row, {
+                        opacity: 1,
+                        scale: 1,
+                        duration: 0.3,
+                        ease: 'power2.out',
+                        onStart: () => row.style.display = 'block'
+                    });
+                } else {
+                    // Hide with animation
+                    gsap.to(row, {
+                        opacity: 0,
+                        scale: 0.95,
+                        duration: 0.3,
+                        ease: 'power2.out',
+                        onComplete: () => row.style.display = 'none'
+                    });
+                }
+            });
+        });
+    });
 }
 
 /* ------------------------------------------------
@@ -528,30 +567,76 @@ function initProjectFilter() {
 function initContactForm() {
     const form = document.getElementById('contactForm');
     const formSuccess = document.getElementById('formSuccess');
+    const nameError = document.getElementById('nameError');
+    const emailError = document.getElementById('emailError');
+    const messageError = document.getElementById('messageError');
 
     if (!form) return;
 
+    // Clear errors on input
+    const inputs = form.querySelectorAll('.form-input');
+    inputs.forEach(input => {
+        input.addEventListener('input', () => {
+            const errorId = input.id + 'Error';
+            const errorEl = document.getElementById(errorId);
+            if (errorEl) {
+                errorEl.classList.remove('show');
+                errorEl.textContent = '';
+            }
+        });
+    });
+
     form.addEventListener('submit', (e) => {
         e.preventDefault();
+
+        // Clear previous errors
+        [nameError, emailError, messageError].forEach(error => {
+            error.classList.remove('show');
+            error.textContent = '';
+        });
 
         // Get form data
         const formData = new FormData(form);
         const data = Object.fromEntries(formData);
 
-        // Simple validation
-        if (!data.name || !data.email || !data.message) {
-            // Shake animation for invalid form
-            gsap.to(form, {
-                x: [-10, 10, -10, 10, 0],
-                duration: 0.4,
-                ease: 'power2.out'
-            });
-            return;
+        let hasErrors = false;
+
+        // Name validation
+        if (!data.name.trim()) {
+            nameError.textContent = 'Name is required';
+            nameError.classList.add('show');
+            hasErrors = true;
+        } else if (data.name.trim().length < 2) {
+            nameError.textContent = 'Name must be at least 2 characters';
+            nameError.classList.add('show');
+            hasErrors = true;
         }
 
         // Email validation
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(data.email)) {
+        if (!data.email.trim()) {
+            emailError.textContent = 'Email is required';
+            emailError.classList.add('show');
+            hasErrors = true;
+        } else if (!emailRegex.test(data.email)) {
+            emailError.textContent = 'Please enter a valid email address';
+            emailError.classList.add('show');
+            hasErrors = true;
+        }
+
+        // Message validation
+        if (!data.message.trim()) {
+            messageError.textContent = 'Message is required';
+            messageError.classList.add('show');
+            hasErrors = true;
+        } else if (data.message.trim().length < 10) {
+            messageError.textContent = 'Message must be at least 10 characters';
+            messageError.classList.add('show');
+            hasErrors = true;
+        }
+
+        if (hasErrors) {
+            // Shake animation for invalid form
             gsap.to(form, {
                 x: [-10, 10, -10, 10, 0],
                 duration: 0.4,
@@ -631,6 +716,55 @@ function initContactForm() {
                 ease: 'power2.out'
             });
         });
+    });
+}
+
+/* ------------------------------------------------
+   Theme Toggle
+   ------------------------------------------------ */
+function initThemeToggle() {
+    const themeToggle = document.getElementById('themeToggle');
+    const body = document.body;
+
+    if (!themeToggle) return;
+
+    // Load saved theme from localStorage
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    if (savedTheme === 'light') {
+        body.classList.add('light-theme');
+        themeToggle.classList.add('dark'); // Since it's currently light, button shows moon
+    }
+
+    themeToggle.addEventListener('click', () => {
+        const isLight = body.classList.contains('light-theme');
+
+        if (isLight) {
+            // Switch to dark
+            gsap.to(body, {
+                backgroundColor: '#050505',
+                duration: 0.5,
+                ease: 'power2.out',
+                onComplete: () => {
+                    body.classList.remove('light-theme');
+                    localStorage.setItem('theme', 'dark');
+                    themeToggle.classList.remove('dark');
+                }
+            });
+        } else {
+            // Switch to light
+            gsap.to(body, {
+                backgroundColor: '#ffffff',
+                duration: 0.5,
+                ease: 'power2.out',
+                onStart: () => {
+                    body.classList.add('light-theme');
+                },
+                onComplete: () => {
+                    localStorage.setItem('theme', 'light');
+                    themeToggle.classList.add('dark');
+                }
+            });
+        }
     });
 }
 

@@ -1,6 +1,6 @@
 # Technical Documentation
 
-## Portfolio Website - Assignment 1
+## Portfolio Website - Assignment 2
 
 ---
 
@@ -18,16 +18,25 @@
 
 ## 1. Project Overview
 
-This portfolio website showcases Abdullah Baleid's professional profile, including education, work experience, projects, and certifications. The site features a modern dark theme with coral accent colors, smooth animations, and full responsiveness across devices.
+This portfolio website showcases Abdullah Baleid's professional profile, including education, work experience, projects, certifications, and contact information. The site features modern dark/light themes with coral accent colors, smooth animations, and full responsiveness across devices.
 
 ### Key Features
 - Responsive single-page design
 - Animated hero section with typing effect
 - Interactive experience and project modals
-- Contact form with validation
-- GSAP-powered scroll animations
+- Contact form with enhanced validation and user feedback
+- Project filtering by category
+- Dark/Light theme toggle with localStorage persistence
+- GSAP-powered scroll animations and transitions
 - Custom cursor (desktop only)
 - Mobile navigation menu
+
+### Assignment 2 Enhancements
+- **Dynamic Interactive Feature**: Project filtering system
+- **Data Handling**: Theme preference persistence using localStorage
+- **Error Handling**: Comprehensive form validation with specific error messages
+- **Animations**: Smooth theme transitions and filter animations
+- **User Feedback**: Loading states, success messages, and empty states
 
 ---
 
@@ -103,23 +112,44 @@ window.addEventListener('scroll', () => {
 - **3-column grid** with hover effects
 - **Modal details** with technology tags
 - **Click-to-expand** for full descriptions
+- **Category filtering** with smooth animations
+- **Empty state handling** when no projects match filter
 
-### 4.5 Contact Form
-- **Client-side validation** for required fields
-- **Email format validation** using regex
-- **Visual feedback** with animations
-- **Success message** after submission
+### 4.5 Theme Toggle
+- **Dark/Light mode switching** with CSS custom properties
+- **localStorage persistence** for user preference
+- **Smooth transitions** using GSAP animations
+- **Icon switching** (sun/moon) based on current theme
 
 ```javascript
-// Email validation pattern
-const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+// Theme persistence
+const savedTheme = localStorage.getItem('theme') || 'dark';
+if (savedTheme === 'light') {
+    body.classList.add('light-theme');
+}
 ```
 
-### 4.6 Animations
+### 4.6 Contact Form
+- **Enhanced validation** with specific error messages
+- **Real-time error clearing** on input
+- **Visual feedback** with animations and error styling
+- **Success message** with auto-hide functionality
+
+```javascript
+// Enhanced validation with specific messages
+if (!data.name.trim()) {
+    nameError.textContent = 'Name is required';
+    nameError.classList.add('show');
+}
+```
+
+### 4.7 Animations
 All animations use GSAP with ScrollTrigger:
 - **Reveal animations:** Elements fade in on scroll
 - **Counter animations:** Numbers count up when visible
 - **Parallax effects:** Background elements move at different speeds
+- **Theme transitions:** Smooth background color changes
+- **Filter animations:** Scale and opacity transitions for project cards
 
 ---
 

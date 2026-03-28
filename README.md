@@ -10,9 +10,20 @@ This portfolio showcases my professional profile as a Software Engineering stude
 - Responsive design (desktop, tablet, mobile)
 - Smooth GSAP animations and scroll effects
 - Interactive modals for projects and experience
-- Contact form with validation
+- Contact form with validation and user feedback
 - Custom cursor (desktop)
-- Dark theme with coral accent colors
+- Dark/Light theme toggle with localStorage persistence
+- Project filtering by category
+- Enhanced error handling and user feedback
+
+## Assignment 2 Updates
+
+### New Features Added
+- **Dynamic Interactive Feature**: Project filtering system allowing users to filter projects by category (All, AI/ML, Web Dev)
+- **Data Handling**: Dark/Light theme toggle with user preference saved in localStorage
+- **Enhanced Animations**: Smooth transitions for theme changes, hover effects, and filter animations
+- **Improved Error Handling**: Detailed form validation with specific error messages for each field
+- **User Feedback**: Success messages, loading states, and empty state messages
 
 ## Live Demo
 
@@ -21,9 +32,9 @@ This portfolio showcases my professional profile as a Software Engineering stude
 ## Technology Stack
 
 - **HTML5** - Semantic structure
-- **CSS3** - Custom properties, Grid, Flexbox
-- **JavaScript (ES6+)** - Interactivity
-- **GSAP 3.12** - Animations
+- **CSS3** - Custom properties, Grid, Flexbox, CSS Variables for theming
+- **JavaScript (ES6+)** - Interactivity, localStorage, DOM manipulation
+- **GSAP 3.12** - Animations and transitions
 
 ## Getting Started
 
@@ -35,12 +46,12 @@ This portfolio showcases my professional profile as a Software Engineering stude
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/YOUR_USERNAME/id-name-assignment1.git
+git clone https://github.com/1Baleid/s202245500-1Baleid-assignment1.git
 ```
 
 2. Navigate to project folder:
 ```bash
-cd id-name-assignment1
+cd s202245500-1Baleid-assignment1
 ```
 
 3. Open in browser:
@@ -86,12 +97,27 @@ assignment-1/
 ## AI Usage Summary
 
 This project utilized AI tools (Claude, GitHub Copilot) for:
-- CSS animation generation
-- JavaScript debugging
+- CSS animation generation and theme implementation
+- JavaScript debugging and feature development
 - Responsive design optimization
-- Code structure suggestions
+- Code structure suggestions and error handling
+- Documentation writing
 
 All AI-generated code was reviewed, understood, and modified to fit project requirements. See `docs/ai-usage-report.md` for detailed documentation.
+
+## Deployment
+
+### GitHub Pages
+1. Push your code to GitHub
+2. Go to repository Settings > Pages
+3. Select "Deploy from a branch"
+4. Choose "main" branch and "/ (root)" folder
+5. Save and wait for deployment
+
+### Other Options
+- Netlify: Drag & drop the project folder
+- Vercel: Connect GitHub repository
+- Firebase Hosting: Use Firebase CLI
 
 ## Browser Support
 
